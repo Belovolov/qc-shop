@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string contr = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
+    string action = ViewContext.RouteData.Values["Action"].ToString().ToLower();
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,7 +11,7 @@
     <title>@ViewData["Title"] - QualityCapsIrina</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/admin.css" />
     </environment>
@@ -15,7 +20,7 @@
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
               crossorigin="anonymous"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
@@ -29,7 +34,7 @@
             </a>
         </div>
         <div class="nav-block nav-header">
-            <a asp-area="Admin" asp-controller="Admin" asp-action="Index" style="font-size: 4rem;">Administation panel</a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Index" style="font-size: 3vw;">Administation panel</a>
         </div>
         <div class="nav-block nav-user-actions">
             <p class="nav-item" style="margin-bottom: 0; font-weight: bold;">@User.Identity.Name</p>
@@ -40,23 +45,23 @@
     </nav>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a asp-area="Admin" asp-controller="Categories" asp-action="Index">
+            <a class="nav-link @(contr=="categories"? "active" : "")" id="categories-index" asp-area="Admin" asp-controller="Categories" asp-action="Index">
                 Categories
             </a>
         </li>
         <li class="nav-item">
-            <a asp-area="Admin" asp-controller="Items" asp-action="Index">
+            <a class="nav-link @(contr=="items"? "active" : "")" asp-area="Admin" asp-controller="Items" asp-action="Index">
                 Items
             </a>
         </li>
         <li class="nav-item">
-            <a asp-area="Admin" asp-controller="Suppliers" asp-action="Index">
+            <a class="nav-link @(contr=="suppliers"? "active" : "")" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">
                 Suppliers
             </a>
         </li>
         <li class="nav-item">
-            <a asp-area="Admin" asp-controller="Users" asp-action="Index">
-                Suppliers
+            <a class="nav-link @(contr=="users"? "active" : "")" asp-area="Admin" asp-controller="Users" asp-action="Index">
+                Users
             </a>
         </li>
     </ul>
@@ -67,22 +72,21 @@
             <p>&copy; 2018 - Quality Caps Irina</p>
         </footer>
     </div>
-
     <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.js"></script>
         <script src="~/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome-all.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
         </script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
