@@ -1,0 +1,17 @@
+﻿.login-container {
+    display: flex;
+    justify-content: center;
+}
+.register {
+    margin-top: 10px;
+}
+.validation-summary-errors ul{
+    list-style: none;
+    padding: 0;
+}
+.validation-summary-errors li {
+    background-color: rgb(245, 147, 147);
+    border: 1px solid rgb(242, 71, 71);
+    padding: 5px;
+    margin: 2px;
+}

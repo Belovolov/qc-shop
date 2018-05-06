@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - QualityCapsIrina</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/account.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" 
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+              crossorigin="anonymous"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/account.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="nav-top">
+        <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+        <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>   
+    </nav>
+    <nav class="nav-main">
+        <div class="nav-block nav-categories">
+            <a href="#" class="nav-item">Men</a>
+            <a href="#" class="nav-item">Women</a>
+        </div>
+        <div class="nav-block nav-logo">
+            <a asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo-qc.png" alt="logo" />
+            </a>
+        </div>
+        <div class="nav-block nav-user-actions">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p class="nav-item" style="margin-bottom: 0; font-weight: bold;">@User.Identity.Name</p>
+                <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="nav-item"><i class="fas fa-cog"></i> Admin Panel</a>
+                <form method="post" asp-controller="Account" asp-action="LogOff" class="nav-item">                    
+                    <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </form>
+            }
+            else
+            {
+                <a asp-area="" asp-controller="Account" asp-action="Login" class="nav-item"><i class="fas fa-user"></i> Login</a>
+            }
+            
+            <a href="#" class="nav-item"><i class="fas fa-shopping-bag"></i> Cart</a>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2018 - Quality Caps Irina</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome-all.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"
+                asp-fallback-src="~/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome-all.min.js"
+                crossorigin="anonymous"
+                integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿.config-panel {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.config-block {
+    box-sizing: padding-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(98, 98, 98, 0.63);
+    border: 1px solid grey;
+    padding: 2%;
+    margin: 1%;
+    color: black;
+}
+.config-block:hover {
+
+}
+.config-block a {
+    color: black;
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+.config-block a:hover {
+    font-weight: bold;
+}

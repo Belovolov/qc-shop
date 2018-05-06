@@ -1,0 +1,32 @@
+﻿@model QualityCapsIrina.Models.ViewModels.LoginViewModel
+
+<div class="login-container">
+    <div class="login-form-container">
+        <h2>Log in</h2>
+        <form method="post" asp-controller="Account" asp-action="Login"
+              asp-route-returnUrl="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div>
+                <label asp-for="Email"></label><br />
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div>
+                <label asp-for="Password"></label><br />
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div>
+                <label asp-for="RememberMe"></label><br />
+                <input asp-for="RememberMe" />
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary"value="Log In" />
+                <a asp-controller="Account" asp-action="Register" class="btn btn-info">Create a new account</a>
+            </div>
+        </form>
+    </div>
+    @*<div class="register">
+        <a asp-controller="Account" asp-action="Register">Create a new account</a>
+    </div>*@
+</div>
