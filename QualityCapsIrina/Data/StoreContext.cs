@@ -16,6 +16,7 @@ namespace QualityCapsIrina.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

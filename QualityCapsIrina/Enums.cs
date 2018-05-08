@@ -10,4 +10,10 @@ namespace QualityCapsIrina
         Waiting,
         Shipped        
     }
+    public enum Gender
+    {
+        Men,
+        Women,
+        Unisex
+    }
 }
