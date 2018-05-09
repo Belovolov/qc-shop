@@ -55,8 +55,9 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
         // GET: Admin/Items/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId");
+            ViewData["Genders"] = new SelectList(Enum.GetValues(typeof(Gender)).Cast<Gender>());
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name");
             return View();
         }
 
@@ -84,8 +85,8 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", item.CategoryId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", item.SupplierId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", item.CategoryId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", item.SupplierId);
             return View(item);
         }
 
@@ -102,8 +103,9 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", item.CategoryId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", item.SupplierId);
+            ViewData["Genders"] = new SelectList(Enum.GetValues(typeof(Gender)).Cast<Gender>(), item.Gender);            
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", item.CategoryId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", item.SupplierId);
             return View(item);
         }
 
@@ -112,7 +114,7 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(IFormFile imageFile, int id, [Bind("ItemId,Name,Description,Price,Gender,SupplierId,CategoryId")] Item item)
+        public async Task<IActionResult> Edit(IFormFile imageFile, int id, [Bind("ItemId,Name,Description,ImageUrl,Price,Gender,SupplierId,CategoryId")] Item item)
         {
             if (id != item.ItemId)
             {
@@ -150,8 +152,8 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", item.CategoryId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "SupplierId", item.SupplierId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", item.CategoryId);
+            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", item.SupplierId);
             return View(item);
         }
 
