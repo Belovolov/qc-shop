@@ -22,7 +22,7 @@
                     @Html.DisplayNameFor(model => model.Price)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ImageUrl)
+                    Image
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Gender)
@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                <img src="@item.ImageUrl" asp-append-version="true" width="100" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)

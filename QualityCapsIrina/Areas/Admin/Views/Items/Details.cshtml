@@ -29,10 +29,10 @@
             @Html.DisplayFor(model => model.Price)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
+            Image
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
+            <img src="@Model.ImageUrl" asp-append-version="true" width="150"/>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Gender)
