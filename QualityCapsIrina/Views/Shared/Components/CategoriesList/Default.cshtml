@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Category>
+
+<h3>Categories</h3>
+<ul>
+    <li>All</li>
+    @foreach (var category in Model)
+    {
+        <li>@category.Name</li>
+    }
+</ul>
+

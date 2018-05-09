@@ -28,8 +28,9 @@
     </nav>
     <nav class="nav-main">
         <div class="nav-block nav-categories">
-            <a href="#" class="nav-item">Men</a>
-            <a href="#" class="nav-item">Women</a>
+            <a asp-controller="Items" asp-action="Men" class="nav-item">Men</a>
+            <a asp-controller="Items" asp-action="Women" class="nav-item">Women</a>
+            <a href="#" class="nav-item"><i class="fas fa-search"></i></a>
         </div>
         <div class="nav-block nav-logo">
             <a asp-area="" asp-controller="Home" asp-action="Index">
@@ -40,16 +41,18 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <p class="nav-item welcome">@User.Identity.Name</p>
-                <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="nav-item"><i class="fas fa-cog"></i> Admin Panel</a>
-                <form method="post" asp-controller="Account" asp-action="LogOff" class="nav-item">                    
+                @if (User.IsInRole("admin")) {
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="nav-item"><i class="fas fa-cog"></i> Admin Panel</a>
+                }
+                <form method="post" asp-controller="Account" asp-action="LogOff" class="nav-item">
                     <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
                 </form>
             }
             else
             {
-                <a asp-area="" asp-controller="Account" asp-action="Login" class="nav-item"><i class="fas fa-user"></i> Login</a>
+            <a asp-area="" asp-controller="Account" asp-action="Login" class="nav-item"><i class="fas fa-user"></i> Login</a>
             }
-            
+
             <a href="#" class="nav-item"><i class="fas fa-shopping-bag"></i> Cart</a>
         </div>
     </nav>

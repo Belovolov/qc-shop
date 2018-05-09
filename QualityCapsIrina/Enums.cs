@@ -12,7 +12,7 @@ namespace QualityCapsIrina
     }
     public enum Gender
     {
-        Men,
+        Men = 1,
         Women,
         Unisex
     }
