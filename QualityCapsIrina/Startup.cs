@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using QualityCapsIrina.Data;
 using QualityCapsIrina.Models;
 
@@ -35,12 +36,17 @@ namespace QualityCapsIrina
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<StoreContext>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            //services.AddTransient<IOrderRepository, OrderRepository>();
             //services.Configure<IISOptions>(options =>
             //{
             //    options.ForwardClientCertificate = false;
             //});
 
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +63,7 @@ namespace QualityCapsIrina
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseAuthentication();
 
             app.UseMvc(routes =>

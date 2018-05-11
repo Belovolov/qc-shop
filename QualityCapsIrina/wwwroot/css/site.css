@@ -110,3 +110,28 @@ p.welcome {
     font-weight: bold;
     color:antiquewhite;
 }
+.delivery-message {
+    background-color: gold;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /*animation: slide-down ease forwards;
+    animation-duration: 2s;*/
+    top: -10%;
+    position: relative;
+    display: none;
+    padding: 1% 0%;
+}
+.delivery-message .my-times {
+    position: absolute;
+    right: 20px;
+    font-weight: normal;
+    cursor: pointer;
+}
+@keyframes slide-down {
+    from {
+        top: -10%;
+    }
+    to {
+        top: -5%;
+    }
+}

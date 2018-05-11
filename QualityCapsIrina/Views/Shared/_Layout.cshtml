@@ -11,8 +11,8 @@
         <link rel="stylesheet" href="~/css/account.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" 
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
               crossorigin="anonymous"
               asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/account.css" asp-append-version="true" />
     </environment>
+    @RenderSection("StyleSheets", required: false)
 </head>
 <body>
     <nav class="nav-top">
@@ -53,16 +54,16 @@
             <a asp-area="" asp-controller="Account" asp-action="Login" class="nav-item"><i class="fas fa-user"></i> Login</a>
             }
 
-            <a href="#" class="nav-item"><i class="fas fa-shopping-bag"></i> Cart</a>
+            @await  Component.InvokeAsync("ShoppingCartSummary")
         </div>
     </nav>
-    <div class="container body-content">
+    @*<div class="container body-content">*@
         @RenderBody()
-        <hr />
+        @*<hr />
         <footer>
             <p>&copy; 2018 - Quality Caps Irina</p>
         </footer>
-    </div>
+    </div>*@
 
     <environment include="Development">
         <script src="~/lib/jquery/jquery.js"></script>

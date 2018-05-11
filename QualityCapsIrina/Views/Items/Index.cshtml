@@ -62,7 +62,7 @@
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
-                <a asp-action="Cart" asp-route-id="@item.ItemId">Add to cart</a>
+                <a asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-itemId="@item.ItemId">Add to cart</a>
             </td>
         </tr>
 }

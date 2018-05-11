@@ -9,10 +9,10 @@ using QualityCapsIrina.Models;
 
 namespace QualityCapsIrina.ViewComponents
 {
-    public class CategoriesListViewComponent : ViewComponent
+    public class CategoriesList : ViewComponent
     {
         private readonly StoreContext db;
-        public CategoriesListViewComponent(StoreContext context)
+        public CategoriesList(StoreContext context)
         {
             db = context;
         }
