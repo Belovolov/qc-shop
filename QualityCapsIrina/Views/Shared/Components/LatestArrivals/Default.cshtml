@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Item>
+
+<div class="owl-carousel owl-theme">
+    @foreach (var item in Model)
+    {
+        <img class="item" src="@item.ImageUrl" alt="@item.Name"/>
+    }
+</div>

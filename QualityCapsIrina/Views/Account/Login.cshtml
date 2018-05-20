@@ -1,32 +1,22 @@
 ﻿@model QualityCapsIrina.Models.ViewModels.LoginViewModel
 
-<div class="login-container">
-    <div class="login-form-container">
-        <h2>Log in</h2>
-        <form method="post" asp-controller="Account" asp-action="Login"
-              asp-route-returnUrl="@Model.ReturnUrl">
-            <div asp-validation-summary="ModelOnly"></div>
-            <div>
-                <label asp-for="Email"></label><br />
-                <input asp-for="Email" />
-                <span asp-validation-for="Email"></span>
+@*<div class="login-container">*@
+    @*iv class="login-form-container">*@        
+        <section id="form">
+            <!--form-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 offset-md-2 offset-sm-0">
+                        @await Component.InvokeAsync("LoginForm")
+                    </div>
+                    <div class="col-sm-2 align-self-center">
+                        <h2 class="or">OR</h2>
+                    </div>
+                    <div class="col-sm-4 align-self-center">
+                        <a class="btn btn-info" asp-action="Register" asp-controller="Account">Create new account</a>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label asp-for="Password"></label><br />
-                <input asp-for="Password" />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <div>
-                <label asp-for="RememberMe"></label><br />
-                <input asp-for="RememberMe" />
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary"value="Log In" />
-                <a asp-controller="Account" asp-action="Register" class="btn btn-info">Create a new account</a>
-            </div>
-        </form>
-    </div>
-    @*<div class="register">
-        <a asp-controller="Account" asp-action="Register">Create a new account</a>
-    </div>*@
-</div>
+        </section><!--/form-->
+    @*</div>*@
+@*</div>*@

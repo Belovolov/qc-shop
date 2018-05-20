@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<Category>
 
-<h3>Categories</h3>
-<ul>
-    <li>All</li>
-    @foreach (var category in Model)
-    {
-        <li>@category.Name</li>
-    }
-</ul>
+<a href="#">All</a>
+@foreach (var category in Model)
+{
+    <a href="#">@category.Name</a>
+}
 

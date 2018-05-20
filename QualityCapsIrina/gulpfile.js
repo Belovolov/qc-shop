@@ -25,6 +25,10 @@ var deps = {
     "bootstrap": {
         "dist/**/*": ""
     },
+    "owl.carousel": {
+        "dist/*": "",
+        "dist/assets/*": ""
+    }
     // ...
 
 };

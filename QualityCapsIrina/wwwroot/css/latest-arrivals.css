@@ -1,0 +1,25 @@
+﻿.latest-arrivals {
+    position: relative;
+    margin-top: 2%;
+}
+.latest-arrivals__title::before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    top: 18px;
+    left: 0;
+    background-color: #dedede;
+}
+.latest-arrivals__title {
+    text-align: center;    
+}
+.latest-arrivals__title__text {
+    background-color: white;
+    display: inline-block;
+    position: relative;
+    padding: 0.5% 2%;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+}

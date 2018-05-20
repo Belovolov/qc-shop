@@ -174,6 +174,8 @@ namespace QualityCapsIrina.Migrations
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("ArrivalDate");
+
                     b.Property<int>("CategoryId");
 
                     b.Property<string>("Description");
@@ -182,7 +184,9 @@ namespace QualityCapsIrina.Migrations
 
                     b.Property<string>("ImageUrl");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<double>("Price");
 

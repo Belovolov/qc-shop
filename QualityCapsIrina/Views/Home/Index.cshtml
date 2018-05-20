@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="home-page__wrapper">
+<div class="hone-page__row-1">
     <div class="carousel__wrapper">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
             <ul class="carousel-indicators">
@@ -30,25 +30,43 @@
         </div>
     </div>
     <div class="shop-genders__wrapper">
-        <div class="shop-gender">
+        <div class="shop-gender shop-gender__men">
             <img src="~/images/ForMen.jpg" />
+            <p>Men</p>
+            <div class="click-overlay" data-link="/items/men">
+                <div class="shop-gender__shop-btn">Shop</div>
+            </div>
         </div>
-        <div clas="shop-gender">
+        <div class="shop-gender shop-gender__women" data-link="/items/women">
             <img src="~/images/ForWomen.jpg" />
+            <p>Women</p>
+            <div class="click-overlay" data-link="/items/men">
+                <div class="shop-gender__shop-btn">Shop</div>
+            </div>
         </div>
     </div>
 </div>
+<div class="latest-arrivals">
+    <div class="latest-arrivals__title">
+        <span class="latest-arrivals__title__text">Latest arrivals</span>
+    </div>
+    @await Component.InvokeAsync("LatestArrivals")
+</div>
 
 
-    @section Scripts
-        {
-        <script src="~/js/deliveryInfo.js"></script>
-    }
-    @section StyleSheets {
-        <environment include="Development">
-            <link rel="stylesheet" href="~/css/StyleSheet.css" />
-        </environment>
-        <environment exclude="Development">
-            <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
-        </environment>
-    }
+
+@section Scripts
+{
+    <script src="~/js/deliveryInfo.js"></script>
+    <script src="~/js/hover.js"></script>
+}
+@section StyleSheets {
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/home-page.css" />
+        <link rel="stylesheet" href="~/css/latest-arrivals.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/home-page.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/latest-arrivals.css" />
+    </environment>
+}

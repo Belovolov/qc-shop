@@ -6,75 +6,81 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAHaQ/NpAXqkOWEDUDwEs6NgAAAAACAAAAAAAQZgAAAAEAACAAAABY+3KJg4netdKacL4KehUlyV31JzfMOU3POK2be3yn1gAAAAAOgAAAAAIAACAAAACFAe2S3u12O83JMZL8GFI7EnHuD+tkoHQWs8BquHwRByAAAABeRILQ+SlFtbIJOxZrA5oFv02qrKZKLy05mMCICYOIsUAAAAB5aUCCAgrNvk2T4LE9Q5ZZAPyyQwPL0IhPUMkiSGYBE+HOrdeV12AbFp6pSoxmt/oAe/bggUigHNfo/iLqh1FM</EncryptedPassword>
-    <_PublishTargetUrl>ftp://dochyper.unitec.ac.nz/QualityCaps</_PublishTargetUrl>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnb57laUpJUKutCVzoQHzkgAAAAACAAAAAAAQZgAAAAEAACAAAADckmR27KcZ18/vSTj49ViMWEeBuUiNX22p83ItaDOyzQAAAAAOgAAAAAIAACAAAABbYXMUQYhZEgs5Cmrh8BGCjBF9JiX8/PNCBj9cjKbCgiAAAADSit0tPAojQwM2RsvrE9ivrwignJRW2hAAkHdfBzqblUAAAAATQhTAKDVq3BAAjvqgvN3irW/Owz6gM+JVReXnpAvlsADG0cKauEtGuaep5SyvY/1bsCU+515jiKtrpakKPUOX</EncryptedPassword>
+    <_PublishTargetUrl>ftp://dochyper.unitec.ac.nz/asp_assignment</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>04/14/2018 00:58:58</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>04/17/2018 19:33:07</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="appsettings.production.json">
-      <publishTime>04/17/2018 19:35:07</publishTime>
+      <publishTime>05/14/2018 16:31:34</publishTime>
     </File>
     <File Include="aws-beanstalk-tools-defaults.json">
-      <publishTime>04/17/2018 00:19:27</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="bundleconfig.json">
-      <publishTime>04/14/2018 00:58:58</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="dotnet-aspnet-codegenerator-design.dll">
-      <publishTime>02/20/2018 20:41:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="hosting.json">
-      <publishTime>04/14/2018 20:32:07</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>02/20/2018 14:37:46</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.CodeAnalysis.CSharp.Workspaces.dll">
       <publishTime>02/20/2018 14:37:46</publishTime>
     </File>
     <File Include="Microsoft.CodeAnalysis.dll">
-      <publishTime>02/20/2018 14:37:46</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.CodeAnalysis.Workspaces.dll">
       <publishTime>02/20/2018 14:37:48</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll">
-      <publishTime>02/20/2018 20:41:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Core.dll">
-      <publishTime>02/20/2018 20:41:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.dll">
-      <publishTime>02/20/2018 20:41:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll">
-      <publishTime>02/20/2018 20:41:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll">
-      <publishTime>02/20/2018 20:41:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll">
-      <publishTime>02/20/2018 20:41:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll">
-      <publishTime>02/20/2018 20:41:26</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="NuGet.Frameworks.dll">
-      <publishTime>03/05/2018 21:48:35</publishTime>
+      <publishTime>05/09/2018 22:31:05</publishTime>
+    </File>
+    <File Include="package-lock.json">
+      <publishTime>05/14/2018 14:48:20</publishTime>
+    </File>
+    <File Include="package.json">
+      <publishTime>05/14/2018 14:48:20</publishTime>
     </File>
     <File Include="QualityCapsIrina.deps.json">
-      <publishTime>04/17/2018 19:35:06</publishTime>
+      <publishTime>05/14/2018 16:31:34</publishTime>
     </File>
     <File Include="QualityCapsIrina.dll">
-      <publishTime>04/17/2018 19:34:38</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="QualityCapsIrina.pdb">
-      <publishTime>04/17/2018 19:34:38</publishTime>
+      <publishTime>05/14/2018 16:25:23</publishTime>
     </File>
     <File Include="QualityCapsIrina.PrecompiledViews.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -83,76 +89,154 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="QualityCapsIrina.runtimeconfig.json">
-      <publishTime>04/17/2018 19:35:07</publishTime>
+      <publishTime>05/14/2018 16:31:34</publishTime>
     </File>
     <File Include="System.Composition.AttributedModel.dll">
-      <publishTime>03/05/2018 21:48:40</publishTime>
+      <publishTime>05/09/2018 22:31:34</publishTime>
     </File>
     <File Include="System.Composition.Convention.dll">
-      <publishTime>03/05/2018 21:48:47</publishTime>
+      <publishTime>05/09/2018 22:31:34</publishTime>
     </File>
     <File Include="System.Composition.Hosting.dll">
-      <publishTime>03/05/2018 21:48:47</publishTime>
+      <publishTime>05/09/2018 22:31:34</publishTime>
     </File>
     <File Include="System.Composition.Runtime.dll">
-      <publishTime>03/05/2018 21:48:48</publishTime>
+      <publishTime>05/09/2018 22:31:05</publishTime>
     </File>
     <File Include="System.Composition.TypedParts.dll">
-      <publishTime>03/05/2018 21:48:49</publishTime>
+      <publishTime>05/09/2018 22:31:05</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>04/17/2018 19:35:07</publishTime>
+      <publishTime>05/14/2018 16:31:34</publishTime>
     </File>
     <File Include="wwwroot/css/account.css">
-      <publishTime>04/15/2018 19:44:23</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/css/admin.css">
-      <publishTime>04/15/2018 23:36:42</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
+    </File>
+    <File Include="wwwroot/css/home-page.css">
+      <publishTime>05/14/2018 16:20:34</publishTime>
     </File>
     <File Include="wwwroot/css/site.css">
-      <publishTime>04/15/2018 23:24:07</publishTime>
+      <publishTime>05/14/2018 16:09:32</publishTime>
     </File>
     <File Include="wwwroot/css/site.min.css">
       <publishTime>04/14/2018 00:58:58</publishTime>
     </File>
     <File Include="wwwroot/favicon.ico">
-      <publishTime>04/14/2018 00:58:58</publishTime>
+      <publishTime>05/11/2018 18:06:54</publishTime>
     </File>
     <File Include="wwwroot/images/banner1.svg">
-      <publishTime>04/14/2018 00:58:58</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/images/banner2.svg">
-      <publishTime>04/14/2018 00:58:58</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/images/banner3.svg">
-      <publishTime>04/14/2018 00:58:58</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/images/banner4.svg">
-      <publishTime>04/14/2018 00:58:58</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/images/cap-collection-1.jpg">
-      <publishTime>04/15/2018 08:46:44</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/images/cap-collection-2.jpg">
-      <publishTime>04/15/2018 08:46:54</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/images/cap-collection-3.jpg">
-      <publishTime>04/15/2018 08:47:07</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/images/Cap-PNG-HD.png">
-      <publishTime>04/14/2018 23:25:11</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
+    </File>
+    <File Include="wwwroot/images/caps/0.jpg">
+      <publishTime>05/09/2018 13:31:31</publishTime>
+    </File>
+    <File Include="wwwroot/images/caps/ANotherguy.jpg">
+      <publishTime>05/11/2018 10:23:42</publishTime>
+    </File>
+    <File Include="wwwroot/images/caps/Funnycap#1.jpg">
+      <publishTime>05/09/2018 23:23:01</publishTime>
+    </File>
+    <File Include="wwwroot/images/caps/Peruviancapred.jpg">
+      <publishTime>05/09/2018 21:09:44</publishTime>
+    </File>
+    <File Include="wwwroot/images/caps/qq.JPG">
+      <publishTime>05/11/2018 10:24:05</publishTime>
+    </File>
+    <File Include="wwwroot/images/caps/Shreckcap.jpg">
+      <publishTime>05/09/2018 23:24:39</publishTime>
+    </File>
+    <File Include="wwwroot/images/caps/test.jpg">
+      <publishTime>05/09/2018 21:10:02</publishTime>
+    </File>
+    <File Include="wwwroot/images/favicon.ico">
+      <publishTime>05/11/2018 18:06:54</publishTime>
+    </File>
+    <File Include="wwwroot/images/favicon1.ico">
+      <publishTime>05/11/2018 17:46:23</publishTime>
+    </File>
+    <File Include="wwwroot/images/ForMen.jpg">
+      <publishTime>05/11/2018 19:26:51</publishTime>
+    </File>
+    <File Include="wwwroot/images/ForWomen.jpg">
+      <publishTime>05/11/2018 19:27:29</publishTime>
     </File>
     <File Include="wwwroot/images/logo-qc.png">
-      <publishTime>04/14/2018 23:18:19</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo-qc_black.png">
+      <publishTime>05/11/2018 17:40:21</publishTime>
+    </File>
+    <File Include="wwwroot/js/deliveryInfo.js">
+      <publishTime>05/11/2018 17:58:38</publishTime>
     </File>
     <File Include="wwwroot/js/site.js">
-      <publishTime>04/14/2018 00:58:58</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/js/site.min.js">
       <publishTime>04/14/2018 00:58:58</publishTime>
     </File>
     <File Include="wwwroot/lib/bootstrap/.bower.json">
       <publishTime>04/14/2018 00:58:58</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap-grid.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap-grid.css.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap-grid.min.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap-grid.min.css.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap-reboot.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap-reboot.css.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap-reboot.min.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap-reboot.min.css.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap.css.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap.min.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/css/bootstrap.min.css.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
     </File>
     <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css">
       <publishTime>04/14/2018 00:58:58</publishTime>
@@ -201,6 +285,30 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/lib/bootstrap/dist/js/npm.js">
       <publishTime>04/14/2018 00:58:59</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/js/bootstrap.bundle.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/js/bootstrap.bundle.js.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/js/bootstrap.bundle.min.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/js/bootstrap.bundle.min.js.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/js/bootstrap.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/js/bootstrap.js.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/js/bootstrap.min.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/js/bootstrap.min.js.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
     </File>
     <File Include="wwwroot/lib/bootstrap/LICENSE">
       <publishTime>04/14/2018 00:58:59</publishTime>
@@ -9416,49 +9524,49 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2018 23:03:06</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/LICENSE.txt">
-      <publishTime>04/10/2018 23:03:06</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/README.md">
-      <publishTime>04/10/2018 23:03:06</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/css/fa-svg-with-js.css">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fa-brands.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fa-brands.min.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fa-regular.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fa-regular.min.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fa-solid.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fa-solid.min.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fa-v4-shims.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fa-v4-shims.min.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome-all.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome-all.min.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome.min.js">
-      <publishTime>10/04/2018 23:03:08</publishTime>
+      <publishTime>05/06/2018 22:54:17</publishTime>
     </File>
     <File Include="wwwroot/lib/fontawesome-free-5.0.10/use-on-desktop/Font Awesome 5 Brands-Regular-400.otf">
       <publishTime>04/10/2018 23:03:08</publishTime>
@@ -9644,13 +9752,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2018 00:58:59</publishTime>
     </File>
     <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js">
-      <publishTime>04/14/2018 00:58:59</publishTime>
+      <publishTime>05/14/2018 16:31:30</publishTime>
     </File>
     <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">
-      <publishTime>04/14/2018 00:58:59</publishTime>
+      <publishTime>05/14/2018 16:31:30</publishTime>
     </File>
     <File Include="wwwroot/lib/jquery-validation/.bower.json">
       <publishTime>04/14/2018 00:58:59</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/additional-methods.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
     </File>
     <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.js">
       <publishTime>04/14/2018 00:58:59</publishTime>
@@ -9664,11 +9775,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.min.js">
       <publishTime>04/14/2018 00:58:59</publishTime>
     </File>
+    <File Include="wwwroot/lib/jquery-validation/jquery.validate.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/jquery.validate.min.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
     <File Include="wwwroot/lib/jquery-validation/LICENSE.md">
       <publishTime>04/14/2018 00:58:59</publishTime>
     </File>
     <File Include="wwwroot/lib/jquery/.bower.json">
       <publishTime>04/14/2018 00:58:59</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/core.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
     </File>
     <File Include="wwwroot/lib/jquery/dist/jquery.js">
       <publishTime>04/14/2018 00:58:59</publishTime>
@@ -9679,8 +9799,86 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/lib/jquery/dist/jquery.min.map">
       <publishTime>04/14/2018 00:58:59</publishTime>
     </File>
+    <File Include="wwwroot/lib/jquery/jquery.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/jquery.min.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/jquery.min.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/jquery.slim.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/jquery.slim.min.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/jquery.slim.min.map">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
     <File Include="wwwroot/lib/jquery/LICENSE.txt">
       <publishTime>04/14/2018 00:58:59</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/ajax-loader.gif">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/assets/ajax-loader.gif">
+      <publishTime>05/14/2018 14:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/assets/owl.carousel.css">
+      <publishTime>05/14/2018 14:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/assets/owl.carousel.min.css">
+      <publishTime>05/14/2018 14:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/assets/owl.theme.default.css">
+      <publishTime>05/14/2018 14:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/assets/owl.theme.default.min.css">
+      <publishTime>05/14/2018 14:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/assets/owl.theme.green.css">
+      <publishTime>05/14/2018 14:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/assets/owl.theme.green.min.css">
+      <publishTime>05/14/2018 14:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/assets/owl.video.play.png">
+      <publishTime>05/14/2018 14:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/LICENSE">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.carousel.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.carousel.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.carousel.min.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.carousel.min.js">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.theme.default.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.theme.default.min.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.theme.green.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.theme.green.min.css">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/owl.video.play.png">
+      <publishTime>05/14/2018 16:31:30</publishTime>
+    </File>
+    <File Include="wwwroot/lib/owl.carousel/README.md">
+      <publishTime>05/14/2018 16:31:30</publishTime>
     </File>
   </ItemGroup>
   <ItemGroup>

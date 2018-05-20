@@ -70,7 +70,7 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
         {   
             if (ModelState.IsValid)
             {                
-                if (imageFile.Length > 0)
+                if (imageFile!=null && imageFile.Length > 0)
                 {
                     string extension = imageFile.FileName.Split(new char[] { '.' }).Last<string>();
                     string fileName = item.Name.Replace(" ","") + "." + extension;
