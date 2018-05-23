@@ -7,12 +7,14 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/select2/css/select2.css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/account.css" />
         <link rel="stylesheet" href="~/css/dropdown.css" />
         <link rel="stylesheet" href="~/css/utils.css" />
         <link rel="stylesheet" href="~/lib/owl.carousel/assets/owl.carousel.css">
-        <link rel="stylesheet" href="~/lib/owl.carousel/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="~/lib/owl.carousel/assets/owl.theme.default.css">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet"
@@ -21,8 +23,12 @@
               crossorigin="anonymous"
               asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/account.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/dropdown.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/lib/owl.carousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="~/lib/owl.carousel/assets/owl.theme.default.min.css">
     </environment>
     @RenderSection("StyleSheets", required: false)
 </head>
@@ -85,21 +91,69 @@
         </div>
     </nav>
     <div class="body-content">
-        <div class="page-content-wrapper">
-            @RenderBody()
-        </div>        
-        <hr />
-        <footer>
-            <p>&copy; 2018 - Quality Caps Irina</p>
+        
+        @RenderBody()
+        
+        <footer class="d-flex flex-column pl-4 pr-0 pb-4 justify-content-between">
+            <div class="row w-100 d-flex">
+                <div class="col-md-3 col-sm-6 mt-4">
+                    <h5>Navigation</h5>
+                    <div class="d-flex flex-column">
+                        <a asp-area="" asp-controller="home" asp-action="index">Home</a>
+                        <a asp-area="" asp-controller="items" asp-action="men">Men</a>
+                        <a asp-area="" asp-controller="items" asp-action="women">Women</a>
+                        <a asp-area="" asp-controller="home" asp-action="about">About</a>
+                        <a asp-area="" asp-controller="home" asp-action="contact">Contact</a>
+                        <a asp-area="" asp-controller="Home" asp-action="About">Profile</a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mt-4">
+                    <h5>Categories</h5>
+                    <div class="d-flex flex-column">
+                        <a asp-area="" asp-controller="home" asp-action="index">Peruvian</a>
+                        <a asp-area="" asp-controller="items" asp-action="men">Flat</a>
+                        <a asp-area="" asp-controller="items" asp-action="women">Basketball</a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mt-4 ">
+                    <h5>Contact us</h5>
+                    <div class="d-flex flex-column">
+                        <div><i class="fas fa-phone"></i> +64123456789</div>
+                        <div><i class="mr-1 fas fa-location-arrow"></i> 75 Queen Street, Auckland</div>
+                    </div>
+                    <h5 class="mt-4">Social</h5>
+                    <div class="d-flex social">
+                        <a href="#"><i class="mr-1 fab fa-facebook-square hover-orangebrown"></i></a>
+                        <a href="#"><i class="mr-1 fab fa-twitter-square hover-orangebrown"></i></a>
+                        <a href="#"><i class="mr-1 fab fa-instagram hover-orangebrown"></i></a>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 col-sm-6 mt-4 d-flex flex-column justify-content-between">
+                    <div class="mb-4">
+                        <h5>Payment methods</h5>
+                        <div class="d-flex" style="font-size: 30px;">
+                            <i class="mr-1 fab fa-cc-visa"></i>
+                            <i class="mr-1 fab fa-cc-mastercard"></i>
+                            <i class="mr-1 fab fa-cc-paypal"></i>
+                        </div>
+                    </div>
+                    <div><p>2018 - Quality Caps. Belovolov 1484314</p></div>
+                </div>
+            </div>
+            
         </footer>
     </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/jquery.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="~/lib/bootstrap/js/bootstrap.js"></script>
         <script src="~/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome-all.js"></script>
         <script src="~/lib/owl.carousel/owl.carousel.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>        
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/select2/js/select2.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -120,7 +174,8 @@
                 integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+">
         </script>
         <script src="~/lib/owl.carousel/owl.carousel.min.js"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/select2/js/select2.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)

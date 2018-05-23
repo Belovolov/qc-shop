@@ -1,0 +1,26 @@
+﻿.contact-info {
+    font-size: 15px;
+    font-family: Montserrat-Regular;
+    text-align: center;
+}
+.contact-info h4 {
+    background-color: white;
+    position: relative;
+    padding: 0.5% 2%;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.contact-info h4::before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    top: 18px;
+    left: 0;
+    background-color: #dedede;
+}
+.map-container {
+    height: 37vh;
+}

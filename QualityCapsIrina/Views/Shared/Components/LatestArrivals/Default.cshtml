@@ -3,6 +3,10 @@
 <div class="owl-carousel owl-theme">
     @foreach (var item in Model)
     {
-        <img class="item" src="@item.ImageUrl" alt="@item.Name"/>
+    <div class="item">
+        <a asp-controller="items" asp-action="details" asp-route-id="@item.ItemId"><img src="@((item.ImageUrl!=null)? item.ImageUrl:"/images/no-image.png")" alt="@item.Name" /></a>
+        <p class="text-center">@item.Name</p>
+    </div>
+        
     }
 </div>

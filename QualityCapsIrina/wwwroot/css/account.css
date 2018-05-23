@@ -28,11 +28,6 @@
     overflow: hidden;
 }
 
-.login-form {
-}
-
-.signup-form {
-}
 
 .login-form h2, .signup-form h2 {
     color: #696763;
@@ -81,9 +76,6 @@
     display: block;
     font-family: 'Roboto', sans-serif;
     padding: 6px 25px;
-}
-
-.login-form label {
 }
 
 

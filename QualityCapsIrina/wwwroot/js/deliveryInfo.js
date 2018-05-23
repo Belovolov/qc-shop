@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     setTimeout(function () {
         var deliveryMsg = document.createElement('div')
-        $(deliveryMsg).text('Free delivery for orders above 50$')
+        $(deliveryMsg).html('<strong>ONLY TODAY</strong> - Free delivery for all orders!')
         $(deliveryMsg).addClass('delivery-message')
 
         var close = document.createElement('span')

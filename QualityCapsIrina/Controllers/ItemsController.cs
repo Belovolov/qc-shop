@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QualityCapsIrina.Data;
 using QualityCapsIrina.Models;
+using QualityCapsIrina.Models.ViewModels;
 
 namespace QualityCapsIrina.Controllers
 {
@@ -22,24 +23,61 @@ namespace QualityCapsIrina.Controllers
         // GET: Items
         public async Task<IActionResult> Index()
         {
-            var storeContext = _context.Items.Include(i => i.Category).Include(i => i.Supplier);
-            return View(await storeContext.ToListAsync());
+            var shopViewModel = new ShopViewModel();
+            shopViewModel.items = await _context.Items
+                .Include(i => i.Category).Include(i => i.Supplier).ToListAsync();
+            shopViewModel.categories = await _context.Categories
+                    .ToListAsync();
+            return View(shopViewModel);
         }
         // GET: Items
-        public async Task<IActionResult> Men()
+        public async Task<IActionResult> Men(
+            double minPrice,
+            double maxPrice, 
+            SortOrder sortOrder = SortOrder.Name
+          )
         {
-            var storeContext = _context.Items
+            var shopViewModel = new ShopViewModel();
+            IQueryable<Item> items = _context.Items
                 .Where(item => (item.Gender == Gender.Men) || (item.Gender == Gender.Unisex))
                 .Include(i => i.Category).Include(i => i.Supplier);
-            return View(await storeContext.ToListAsync());
+
+            ViewData["SortOrders"] = new SelectList(Enum.GetValues(typeof(SortOrder)).Cast<SortOrder>().Select(s => s.GetDescription()), sortOrder);
+            
+            shopViewModel.sortOrder = sortOrder;
+            switch (sortOrder)
+            {
+                case SortOrder.Price:
+                    items = items.OrderBy(i => i.Price);
+                    break;
+                case SortOrder.PriceDesc:
+                    items = items.OrderByDescending(i => i.Price);
+                    break;
+                case SortOrder.NameDesc:
+                    items = items.OrderByDescending(i => i.Name);
+                    break;
+                case SortOrder.Name: default:
+                    items = items.OrderBy(i => i.Name);
+                    break;
+            }
+
+            shopViewModel.items = await items.ToListAsync();
+            shopViewModel.categories = await _context.Categories
+                    .Where(x => x.Items.Any<Item>(item => (item.Gender == Gender.Men) || (item.Gender == Gender.Unisex)))
+                    .ToListAsync();
+            return View(shopViewModel);
         }
         // GET: Items
         public async Task<IActionResult> Women()
-        {
-            var storeContext = _context.Items
+        {            
+            var shopViewModel = new ShopViewModel();
+            shopViewModel.items = await _context.Items
                 .Where(item => (item.Gender == Gender.Women) || (item.Gender == Gender.Unisex))
-                .Include(i => i.Category).Include(i => i.Supplier);
-            return View(await storeContext.ToListAsync());
+                .Include(i => i.Category).Include(i => i.Supplier).ToListAsync();
+            shopViewModel.categories = await _context.Categories
+                    .Where(x => x.Items.Any<Item>(item => (item.Gender == Gender.Women) || (item.Gender == Gender.Unisex)))
+                    .ToListAsync();
+            return View(shopViewModel);
         }
 
         // GET: Items/Details/5

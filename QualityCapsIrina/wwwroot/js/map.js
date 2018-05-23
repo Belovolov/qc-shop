@@ -11,18 +11,18 @@
         var scrollwhell = selector_map.attr('data-scrollwhell');
         var draggable = selector_map.attr('data-draggable');
 
-        if (img_pin == null) {
+        if (img_pin === null) {
             img_pin = 'images/icons/location.png';
         }
-        if (data_map_x == null || data_map_y == null) {
+        if (data_map_x === null || data_map_y === null) {
             data_map_x = 40.007749;
             data_map_y = -93.266572;
         }
-        if (scrollwhell == null) {
+        if (scrollwhell === null) {
             scrollwhell = 0;
         }
 
-        if (draggable == null) {
+        if (draggable === null) {
             draggable = 0;
         }
 
@@ -33,8 +33,7 @@
             map_zoom = 14;
 
         var locations = [
-            ['<div class="infobox"><p>Now that you visited our website, how' +
-                ' <br>about checking out our office too?</p></div>'
+            ['<div class="infobox"><p>Come to our boutique for pickup or dressing</p></div>'
                 , latitude, longitude, 2]
         ];
 
