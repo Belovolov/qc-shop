@@ -33,7 +33,8 @@ namespace QualityCapsIrina.Controllers
         // GET: Items
         public async Task<IActionResult> Men(
             double minPrice,
-            double maxPrice, 
+            double maxPrice,
+            int category,
             SortOrder sortOrder = SortOrder.Name
           )
         {
@@ -42,9 +43,31 @@ namespace QualityCapsIrina.Controllers
                 .Where(item => (item.Gender == Gender.Men) || (item.Gender == Gender.Unisex))
                 .Include(i => i.Category).Include(i => i.Supplier);
 
-            ViewData["SortOrders"] = new SelectList(Enum.GetValues(typeof(SortOrder)).Cast<SortOrder>().Select(s => s.GetDescription()), sortOrder);
-            
-            shopViewModel.sortOrder = sortOrder;
+            //category filtering
+            ViewData["ActiveCategory"] = category;
+            if (category != 0)
+            {
+                items = items.Where(i => i.CategoryId == category);
+            }
+
+            //price filtering  
+            var interimItemList = items.ToList();
+            ViewData["MinScalePrice"] = interimItemList.Min(i => i.Price);
+            ViewData["MinPrice"] = (minPrice != 0) ? minPrice : ViewData["MinScalePrice"];
+            ViewData["MaxScalePrice"] = interimItemList.Max(i => i.Price);
+            ViewData["MaxPrice"] = (maxPrice != 0) ? maxPrice : ViewData["MaxScalePrice"];
+
+            if (minPrice != 0)
+            {
+                items = items.Where(i => i.Price >= minPrice);
+            }
+            if (maxPrice != 0)
+            {
+                items = items.Where(i => i.Price <= maxPrice);
+            }
+
+            //sorting
+            ViewData["SortOrders"] = GenerateSortList(sortOrder);
             switch (sortOrder)
             {
                 case SortOrder.Price:
@@ -65,6 +88,9 @@ namespace QualityCapsIrina.Controllers
             shopViewModel.categories = await _context.Categories
                     .Where(x => x.Items.Any<Item>(item => (item.Gender == Gender.Men) || (item.Gender == Gender.Unisex)))
                     .ToListAsync();
+            shopViewModel.categories.Add(new Category { CategoryId = 0, Name = "All" });
+
+            
             return View(shopViewModel);
         }
         // GET: Items
@@ -103,6 +129,20 @@ namespace QualityCapsIrina.Controllers
         private bool ItemExists(int id)
         {
             return _context.Items.Any(e => e.ItemId == id);
+        }
+        private List<SelectListItem> GenerateSortList(SortOrder selected)
+        {
+            var sortList = new List<SelectListItem>();
+            foreach (SortOrder v in Enum.GetValues(typeof(SortOrder)))
+            {
+                sortList.Add(new SelectListItem
+                {
+                    Text = v.GetDescription(),
+                    Value = v.ToString(),
+                    Selected = (v == selected)
+                });
+            }
+            return sortList;
         }
     }
 }

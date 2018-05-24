@@ -12,7 +12,10 @@
                     @foreach (var category in Model.categories)
                     {
                         <li class="pt-1">
-                            <a href="#" class="s-text13 active1">
+                            <a asp-controller="items"
+                               asp-action="@ViewData["Title"]"
+                               asp-route-category="@category.CategoryId"
+                               class="s-text13 active1 @((ViewData["ActiveCategory"].ToString()==category.CategoryId.ToString())? "active":"")">
                                 @category.Name
                             </a>
                         </li>
@@ -36,7 +39,7 @@
                     <div class="flex-sb-m flex-w pt-3">
                         <div class="w-size11">
                             <!-- Button -->
-                            <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+                            <button id="filter-price" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
                                 Filter
                             </button>
                         </div>
@@ -146,4 +149,12 @@
 <!-- Container Selection -->
 <div id="dropDownSelect1"></div>
 <div id="dropDownSelect2"></div>
+
+<!--Hidden filter form-->
+<form id="filtering" asp-action="@ViewData["Title"]" method="GET">
+    <input type="hidden" name="category" value="@ViewData["ActiveCategory"]" />
+    <input type="hidden" name="sortOrder" />
+    <input type="hidden" name="minPrice" value="@ViewData["MinPrice"]"/>
+    <input type="hidden" name="maxPrice" value="@ViewData["MaxPrice"]" />
+</form>
 

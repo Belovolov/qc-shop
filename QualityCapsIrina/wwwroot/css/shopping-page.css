@@ -63,3 +63,7 @@
     .block2-overlay:hover .block2-controls {
         bottom: 15px;
     }
+
+.active {
+    color: #f6931f;
+}

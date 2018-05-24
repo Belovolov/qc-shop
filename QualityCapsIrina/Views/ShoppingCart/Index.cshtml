@@ -73,8 +73,11 @@
                 <li>GST <span>15%</span></li>
                 <li>Grand Total <span>$@(Model.ShoppingCartTotal * (decimal)1.15)</span></li>
             </ul>
-            <div class="btn-checkout d-flex justify-content-end trans-0-4 mt-2 mb-2">
+            <div class="d-flex justify-content-between trans-0-4 mt-2 mb-2">
                 <!-- Button -->
+                <a asp-action="clearShoppingCart" class="flex-c-m bg1 bo-rad-23 hov6 s-text1 trans-0-4 p-2 ml-3 mt-3">
+                    Clear cart
+                </a>
                 <button class="flex-c-m bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-2 mr-3 mt-3">
                     Proceed to checkout
                 </button>
@@ -100,4 +103,11 @@
     <environment exclude="Development">
         <link rel="stylesheet" href="~/css/cart.css" />
     </environment>
+}
+@section Scripts {
+    <script>
+        //$("clear-cart").click(function () {
+        //    window.location.href = 
+        //})
+    </script>
 }

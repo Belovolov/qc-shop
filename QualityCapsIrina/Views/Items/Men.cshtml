@@ -31,22 +31,28 @@
         $(function () {
             $("#slider-range").slider({
                 range: true,
-                min: @Model.MinPrice,
-                max: @Model.MaxPrice,
-                values: [@Model.MinPrice, @Model.MaxPrice],
+                min: @ViewData["MinScalePrice"],
+                max: @ViewData["MaxScalePrice"],
+                values: [@ViewData["MinPrice"], @ViewData["MaxPrice"]],
                 //values: [0,100],
                 slide: function (event, ui) {
                     $("#value-lower").text(ui.values[0]);
                     $("#value-upper").text(ui.values[1]);
                 }
             });
-            //$("#value-lower").text($("#slider-range").slider("values", 0));
-            //$("#value-upper").text($("#slider-range").slider("values", 1));
+            $("#value-lower").text($("#slider-range").slider("values", 0));
+            $("#value-upper").text($("#slider-range").slider("values", 1));
         });
     </script>
     <script>
+        $("#filter-price").on('click', function () {
+            $('#filtering > input[name=minPrice]').val($("#slider-range").slider("values", 0))
+            $('#filtering > input[name=maxPrice]').val($("#slider-range").slider("values", 1))
+            $('#filtering').trigger('submit');
+        })
         $('#sort-selection').on('change', function () {
-            console.log('selected' + $(this).val())
+            $('#filtering > input[name=sortOrder]').val($(this).val())
+            $('#filtering').trigger('submit');
         })
     </script>
 }

@@ -8,7 +8,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white pl-0">
             <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">@Model.Category.Name</a></li>
+            <li class="breadcrumb-item"><a asp-action="index" asp-route-category="@Model.Category.CategoryId">@Model.Category.Name</a></li>
             <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
         </ol>
     </nav>
