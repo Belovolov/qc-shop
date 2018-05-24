@@ -12,9 +12,7 @@
                     @foreach (var category in Model.categories)
                     {
                         <li class="pt-1">
-                            <a asp-controller="items"
-                               asp-action="@ViewData["Title"]"
-                               asp-route-category="@category.CategoryId"
+                            <a asp-route-category="@category.CategoryId"
                                class="s-text13 active1 @((ViewData["ActiveCategory"].ToString()==category.CategoryId.ToString())? "active":"")">
                                 @category.Name
                             </a>
@@ -43,55 +41,55 @@
                                 Filter
                             </button>
                         </div>
-                        <div class="d-flex s-text3 pt-2 pb-2">
+                        <div class="d-flex s-text3 pt-2 pb-2 pl-1">
                             Range: <span style="color:#f6931f; font-weight: bold;">
-                                        $<span id="value-lower">0</span>
-                                        - $<span id="value-upper">100</span>
-                                    </span>
+                                $<span id="value-lower">0</span>
+                                - $<span id="value-upper">100</span>
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <div class="search-product pos-relative bo4 of-hidden">
-                    <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+                    <input class="s-text7 size6 p-l-23 p-r-50"
+                           id="search-query"
+                           type="text"
+                           name="search-product"
+                           value="@ViewBag.SearchQuery"
+                           placeholder="Search Products...">
 
-                    <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-                        <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-                    </button>
+                    <div class="flex-c-m size5 ab-r-m">
+                        <button id="search-clear" class="size7 color2 color0-hov trans-0-4"><i class="fs-15 fa fa-times" aria-hidden="true"></i></button>
+                        <button id="search-submit" class="size7 color2 color0-hov trans-0-4"><i class="fs-15 fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+        <div class="col-sm-6 col-md-8 col-lg-9 pb-5">
             <!--  -->
-            <div class="flex-sb-m flex-w p-b-35">
+            <div class="flex-sb-m flex-w pb-4">
                 <div class="flex-w">
-                    <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                        @*<select class="selection-2" name="sorting">
-                            <option value="">Default Sorting</option>
-                            <option value="name">Name: A to Z</option>
-                            <option value="name_desc">Name: Z to A</option>
-                            <option value="price">Price: low to high</option>
-                            <option value="price_desc">Price: high to low</option>
-                        </select>*@
-                        <select class="selection-2" id="sort-selection" asp-for="sortOrder" asp-items="ViewBag.SortOrders"></select>
+                    <div class="flex-w">
+                        <p class="flex-r-m m-0 mr-2">Sort order</p>
+                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                            <select class="selection-2" id="sort-selection" asp-items="ViewBag.SortOrders"></select>
+                        </div>
                     </div>
-
-                    <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                        <select class="selection-2" name="sorting">
-                            <option>Price</option>
-                            <option>$0.00 - $50.00</option>
-                            <option>$50.00 - $100.00</option>
-                            <option>$100.00 - $150.00</option>
-                            <option>$150.00 - $200.00</option>
-                            <option>$200.00+</option>
-
-                        </select>
+                    <div class="flex-w">
+                        <p class="flex-r-m m-0 mr-2">Items per page</p>
+                        <div class="rs2-select2 bo4 of-hidden w-size11 m-t-5 m-b-5 m-r-10">
+                            <select class="selection-2" id="page-size-selection" asp-items="ViewBag.PageSizes"></select>
+                        </div>
                     </div>
                 </div>
-
+                @{ 
+                    int startIndex = (Model.items.PageIndex - 1) * @Model.items.PageSize + 1;
+                    int endIndex = Model.items.PageIndex * @Model.items.PageSize;
+                }
                 <span class="s-text8 p-t-5 p-b-5">
-                    Showing 1–12 of 16 results
+                    Showing @startIndex-@endIndex of @Model.items.ListCount results
                 </span>
             </div>
 
@@ -109,14 +107,12 @@
                                     <div class="block2-controls w-size1 trans-0-4">
                                         <!-- Button -->
                                         <a asp-controller="shoppingcart" asp-action="AddToShoppingCart" asp-route-itemid="@item.ItemId"
-                                           class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4"
-                                         >
+                                           class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                             Add to Cart
                                         </a>
                                         <!-- Button -->
-                                        <a asp-controller="items" asp-action="details" asp-route-id="@item.ItemId" 
-                                           class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4 m-t-2"
-                                         >
+                                        <a asp-controller="items" asp-action="details" asp-route-id="@item.ItemId"
+                                           class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4 m-t-2">
                                             View details
                                         </a>
                                     </div>
@@ -140,8 +136,13 @@
 
             <!-- Pagination -->
             <div class="pagination flex-m flex-w p-t-26">
-                <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+                @for (int i = 1; i <= Model.items.TotalPages; i++)
+                {
+                    var active = (Model.items.PageIndex == i) ? "active-pagination" : "";
+                    <button
+                       data-page="@i"
+                       class="item-pagination flex-c-m trans-0-4 @active">@i</button>
+                }
             </div>
         </div>
     </div>
@@ -153,8 +154,17 @@
 <!--Hidden filter form-->
 <form id="filtering" asp-action="@ViewData["Title"]" method="GET">
     <input type="hidden" name="category" value="@ViewData["ActiveCategory"]" />
-    <input type="hidden" name="sortOrder" />
-    <input type="hidden" name="minPrice" value="@ViewData["MinPrice"]"/>
+    <input type="hidden" name="sortOrder" value="@ViewData["CurrentSortOrder"]" />
+    <input type="hidden" name="minPrice" value="@ViewData["MinPrice"]" />
     <input type="hidden" name="maxPrice" value="@ViewData["MaxPrice"]" />
+    <input type="hidden" name="pageSize" value="@ViewData["PageSize"]" />
+    <input type="hidden" name="page" />
+    <input type="hidden" name="searchQuery" value="@ViewData["SearchQuery"]"/>
+
 </form>
 
+@*asp-route-category="@ViewData["ActiveCategory"]"
+                       asp-route-page="@i"
+                    asp-route-pageSize="@ViewData["PageSize"]"
+                    asp-route-sortOrder = "@ViewData["CurrentSortOrder"]"
+                    asp-route-minPrice=""*@

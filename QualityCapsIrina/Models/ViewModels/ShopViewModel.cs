@@ -9,7 +9,7 @@ namespace QualityCapsIrina.Models.ViewModels
 {
     public class ShopViewModel
     {
-        public ICollection<Item> items;
+        public PaginatedList<Item> items;
         public ICollection<Category> categories;
         public SortOrder sortOrder;
         public double MaxPrice {

@@ -37,13 +37,13 @@
             <a asp-area="Admin" asp-controller="Admin" asp-action="Index" style="font-size: 3vw;">Administation panel</a>
         </div>
         <div class="nav-block nav-user-actions">
-            <p class="nav-item" style="margin-bottom: 0; font-weight: bold;">@User.Identity.Name</p>
+            <p class="nav-item welcome" style="margin-bottom: 0; font-weight: bold;">@User.Identity.Name</p>
             <form method="post" asp-area="" asp-controller="Account" asp-action="LogOff" class="nav-item">
                 <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </form>
         </div>
     </nav>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs mt-3 mb-3">
         <li class="nav-item">
             <a class="nav-link @(contr=="categories"? "active" : "")" id="categories-index" asp-area="Admin" asp-controller="Categories" asp-action="Index">
                 Categories
