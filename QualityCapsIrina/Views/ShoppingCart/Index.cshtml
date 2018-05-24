@@ -90,7 +90,7 @@
             <div class="card-body d-flex align-items-center flex-column">
                 <h5 class="card-title">Cart is empty</h5>
                 <p class="card-text">Go to the catalogue and add all the caps you like</p>
-                <a asp-controller="items" asp-action="index" class="btn btn-dark">Go shopping</a>
+                <a asp-controller="home" asp-action="index" class="btn btn-dark">Go shopping</a>
             </div>
         </div>
     }
@@ -103,11 +103,4 @@
     <environment exclude="Development">
         <link rel="stylesheet" href="~/css/cart.css" />
     </environment>
-}
-@section Scripts {
-    <script>
-        //$("clear-cart").click(function () {
-        //    window.location.href = 
-        //})
-    </script>
 }

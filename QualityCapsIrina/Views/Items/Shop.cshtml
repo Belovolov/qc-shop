@@ -1,0 +1,258 @@
+﻿@model ShopViewModel
+
+@{
+    ViewData["Title"] = ViewData["Gender"];
+    var bannerClass = ((Gender)ViewData["Gender"] == Gender.Men) ? "men-banner":"women-banner";
+    var aspAction = ((Gender)ViewData["Gender"] == Gender.Men) ? "men" : "women";
+}
+
+<section class="@bannerClass">
+    @*<h2 class="section-header">Men</h2>*@
+</section>
+
+<div class="page-content-wrapper">
+    <!-- Content page -->
+    <section class="p-t-55 p-b-65">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3 pb-4 pr-5">
+                <div class="leftbar pr-4 pr-sm-0">
+                    <h4 class="m-text14 pb-1">
+                        Categories
+                    </h4>
+
+                    <ul class="pb-4">
+                        @foreach (var category in Model.categories)
+                        {
+                            <li class="pt-1">
+                                <a asp-action="@aspAction"
+                                   asp-route-category="@category.CategoryId"
+                                   class="s-text13 active1 @((ViewData["ActiveCategory"].ToString()==category.CategoryId.ToString())? "active":"")">
+                                    @category.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                    <!--  -->
+                    <h4 class="m-text14 pb-1">
+                        Filters
+                    </h4>
+
+                    <div class="filter-price p-t-22 p-b-50 bo3">
+                        <div class="m-text15 p-b-17">
+                            Price
+                        </div>
+
+                        <div class="slider-range-wrapper">
+                            <div id="slider-range"></div>
+                        </div>
+
+                        <div class="flex-sb-m flex-w pt-3">
+                            <div class="w-size11">
+                                <!-- Button -->
+                                <button id="filter-price" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+                                    Filter
+                                </button>
+                            </div>
+                            <div class="d-flex s-text3 pt-2 pb-2 pl-1">
+                                Range: <span style="color:#f6931f; font-weight: bold;">
+                                    $<span id="value-lower">0</span>
+                                    - $<span id="value-upper">100</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="search-product pos-relative bo4 of-hidden">
+                        <input class="s-text7 size6 p-l-23 p-r-50"
+                               id="search-query"
+                               type="text"
+                               name="search-product"
+                               value="@ViewBag.SearchQuery"
+                               placeholder="Search Products...">
+
+                        <div class="flex-c-m size5 ab-r-m">
+                            <button id="search-clear" class="size7 color2 color0-hov trans-0-4"><i class="fs-15 fa fa-times" aria-hidden="true"></i></button>
+                            <button id="search-submit" class="size7 color2 color0-hov trans-0-4"><i class="fs-15 fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-8 col-lg-9 pb-5">
+                <!--  -->
+                <div class="flex-sb-m flex-w pb-4">
+                    <div class="flex-w">
+                        <div class="flex-w">
+                            <p class="flex-r-m m-0 mr-2">Sort order</p>
+                            <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                                <select class="selection-2" id="sort-selection" asp-items="ViewBag.SortOrders"></select>
+                            </div>
+                        </div>
+                        <div class="flex-w">
+                            <p class="flex-r-m m-0 mr-2">Items per page</p>
+                            <div class="rs2-select2 bo4 of-hidden w-size11 m-t-5 m-b-5 m-r-10">
+                                <select class="selection-2" id="page-size-selection" asp-items="ViewBag.PageSizes"></select>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        int startIndex = (Model.items.PageIndex - 1) * @Model.items.PageSize + 1;
+                        int endIndex = Model.items.PageIndex * @Model.items.PageSize;
+                    }
+                    <span class="s-text8 p-t-5 p-b-5">
+                        Showing @startIndex-@endIndex of @Model.items.ListCount results
+                    </span>
+                </div>
+
+                <!-- Product -->
+                <div class="row">
+                    @foreach (var item in Model.items)
+                    {
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                    <img src="@((item.ImageUrl!=null)? item.ImageUrl:"/images/no-image.png")" alt="product image">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <div class="block2-controls w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <a asp-controller="shoppingcart" asp-action="AddToShoppingCart" asp-route-itemid="@item.ItemId"
+                                               class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </a>
+                                            <!-- Button -->
+                                            <a asp-controller="items" asp-action="details" asp-route-id="@item.ItemId"
+                                               class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4 m-t-2">
+                                                View details
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a asp-controller="items" asp-action="details" asp-route-id="@item.ItemId" class="block2-name dis-block s-text3 p-b-5">
+                                        @item.Name
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+                                        $@item.Price
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination flex-m flex-w p-t-26">
+                    @for (int i = 1; i <= Model.items.TotalPages; i++)
+                    {
+                        var active = (Model.items.PageIndex == i) ? "active-pagination" : "";
+                        <button data-page="@i"
+                                class="item-pagination flex-c-m trans-0-4 @active">
+                            @i
+                            </button>
+                        }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Container Selection -->
+    <div id="dropDownSelect1"></div>
+    <div id="dropDownSelect2"></div>
+
+    <!--Hidden filter form-->
+    <form id="filtering" asp-action="@aspAction" method="GET">
+        <input type="hidden" name="category" value="@ViewData["ActiveCategory"]" />
+        <input type="hidden" name="sortOrder" value="@ViewData["CurrentSortOrder"]" />
+        <input type="hidden" name="minPrice" value="@ViewData["MinPrice"]" />
+        <input type="hidden" name="maxPrice" value="@ViewData["MaxPrice"]" />
+        <input type="hidden" name="pageSize" value="@ViewData["PageSize"]" />
+        <input type="hidden" name="page" />
+        <input type="hidden" name="searchQuery" value="@ViewData["SearchQuery"]" />
+
+    </form>
+
+    @*asp-route-category="@ViewData["ActiveCategory"]"
+           asp-route-page="@i"
+        asp-route-pageSize="@ViewData["PageSize"]"
+        asp-route-sortOrder = "@ViewData["CurrentSortOrder"]"
+        asp-route-minPrice=""*@
+</div>
+
+@section StyleSheets {
+    <link href="~/css/shopping-page.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script type="text/javascript">
+        $(".selection-1").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        });
+
+        $(".selection-2").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect2')
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: @ViewData["MinScalePrice"],
+                max: @ViewData["MaxScalePrice"],
+                values: [@ViewData["MinPrice"], @ViewData["MaxPrice"]],
+                //values: [0,100],
+                slide: function (event, ui) {
+                    $("#value-lower").text(ui.values[0]);
+                    $("#value-upper").text(ui.values[1]);
+                }
+            });
+            $("#value-lower").text($("#slider-range").slider("values", 0));
+            $("#value-upper").text($("#slider-range").slider("values", 1));
+        });
+    </script>
+    <script>
+        $("button.item-pagination").click(function (e) {
+            e.preventDefault();
+            $('#filtering > input[name=page]').val($(this).attr("data-page"))
+            $('#filtering').trigger('submit');
+
+        })
+        $("#page-size-selection").on('change', function () {
+            $('#filtering > input[name=pageSize]').val($(this).val())
+            $('#filtering').trigger('submit');
+        })
+        $("#filter-price").on('click', function () {
+            $('#filtering > input[name=minPrice]').val($("#slider-range").slider("values", 0))
+            $('#filtering > input[name=maxPrice]').val($("#slider-range").slider("values", 1))
+            $('#filtering').trigger('submit');
+        })
+        $('#sort-selection').on('change', function () {
+            $('#filtering > input[name=sortOrder]').val($(this).val())
+            $('#filtering').trigger('submit');
+        })
+
+        $("#search-submit").click(function () {
+            search($("#search-query").val())
+
+        })
+        $("#search-query").keyup(function (e) {
+            if (e.key == 'Enter') {
+                search($(this).val())
+            }
+        })
+        function search(query) {
+            $('#filtering > input[name=searchQuery]').val(query)
+            $('#filtering').trigger('submit');
+        }
+        $("#search-clear").click(function () {
+            $("#search-query").val('')
+            $("#search-query").focus()
+        })
+    </script>
+}

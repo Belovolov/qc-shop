@@ -12,6 +12,12 @@ namespace QualityCapsIrina.Models.ViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Display(Name = "Username (optional)")]
+        [MaxLength(20)]        
+        public string Username { get; set; }
+
+        
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
