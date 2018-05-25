@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using QualityCapsIrina.Data;
 using QualityCapsIrina.Models;
+using QualityCapsIrina.Services;
 
 namespace QualityCapsIrina
 {
@@ -33,7 +34,7 @@ namespace QualityCapsIrina
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(connection));
             services.AddSingleton(HostingEnvironment); 
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<StoreContext>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -47,6 +48,8 @@ namespace QualityCapsIrina
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration.GetSection("SendGrid"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,3 +17,5 @@ $('.owl-carousel').owlCarousel({
         }
     }
 })
+
+$('#confirmation-message').modal()

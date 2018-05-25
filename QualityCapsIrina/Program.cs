@@ -25,7 +25,7 @@ namespace QualityCapsIrina
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var userManager = services.GetRequiredService<UserManager<User>>();
+                    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
                     var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     t = RoleInitializer.InitializeAsync(userManager, rolesManager);
                     t.Wait();

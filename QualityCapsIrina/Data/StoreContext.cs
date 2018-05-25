@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QualityCapsIrina.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace QualityCapsIrina.Data
 {
-    public class StoreContext : IdentityDbContext<User>
+    public class StoreContext : IdentityDbContext<IdentityUser>
     {
         public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
@@ -12,7 +13,6 @@ namespace QualityCapsIrina.Data
         public DbSet<Item> Items { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<User> User { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
