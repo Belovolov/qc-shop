@@ -11,7 +11,26 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-4 offset-lg-4 offset-sm-3">
-                @await Component.InvokeAsync("RegisterForm")
+                <div class="signup-form">
+                    <!--sign up form-->
+                    <h2>New User Signup!</h2>
+                    <form method="post" asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                        <div>
+                            <input id="register-email" asp-for="Email" placeholder="Email" />
+                        </div>
+                        <div>
+                            <input id="register-username" asp-for="Username" placeholder="Username (optional)" />
+                        </div>
+                        <div>
+                            <input id="register-password" asp-for="Password" placeholder="Password" />
+                        </div>
+                        <div>
+                            <input asp-for="PasswordConfirm" placeholder="Confirm password" />
+                        </div>
+                        <button type="submit" class="btn btn-default">Signup</button>
+                    </form>
+                </div><!--/sign up form-->
             </div>            
         </div>
     </div>

@@ -16,8 +16,6 @@ namespace QualityCapsIrina.Models.ViewModels
         [MaxLength(20)]        
         public string Username { get; set; }
 
-        
-
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -28,5 +26,7 @@ namespace QualityCapsIrina.Models.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         public string PasswordConfirm { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

@@ -20,23 +20,35 @@ namespace QualityCapsIrina.Controllers
             _signInManager = signInManager;
         }
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult Register(string returnUrl = null)
         {
-            return View();
+            return View(new RegisterViewModel { ReturnUrl = returnUrl });
         }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email};
+                User user = new User {
+                    Email = model.Email,
+                    UserName = (model.Username != null) ? model.Username :  model.Email
+                };
                 //adding user
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //create customer record
+
                     // seting cookie
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
@@ -51,6 +63,8 @@ namespace QualityCapsIrina.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
+            if (string.IsNullOrEmpty(returnUrl) && Request.Headers["Referer"].ToString() != null)
+                returnUrl = new Uri(Request.Headers["Referer"].ToString()).PathAndQuery;
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
