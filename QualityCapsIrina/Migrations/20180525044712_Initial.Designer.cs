@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
 using QualityCapsIrina;
 using QualityCapsIrina.Data;
 using System;
@@ -12,8 +13,8 @@ using System;
 namespace QualityCapsIrina.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20180508094056_Shopping Cart")]
-    partial class ShoppingCart
+    [Migration("20180525044712_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,6 +64,62 @@ namespace QualityCapsIrina.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -142,38 +199,12 @@ namespace QualityCapsIrina.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("QualityCapsIrina.Models.Customer", b =>
-                {
-                    b.Property<int>("CustomerID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("HomeNumber");
-
-                    b.Property<string>("MobileNumber");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("UserId");
-
-                    b.Property<string>("UserId1");
-
-                    b.Property<string>("WorkNumber");
-
-                    b.HasKey("CustomerID");
-
-                    b.HasIndex("UserId1")
-                        .IsUnique()
-                        .HasFilter("[UserId1] IS NOT NULL");
-
-                    b.ToTable("Customers");
-                });
-
             modelBuilder.Entity("QualityCapsIrina.Models.Item", b =>
                 {
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("ArrivalDate");
 
                     b.Property<int>("CategoryId");
 
@@ -183,7 +214,9 @@ namespace QualityCapsIrina.Migrations
 
                     b.Property<string>("ImageUrl");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<double>("Price");
 
@@ -203,7 +236,7 @@ namespace QualityCapsIrina.Migrations
                     b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CustomerID");
+                    b.Property<string>("CustomerID");
 
                     b.Property<DateTime>("Date");
 
@@ -275,55 +308,43 @@ namespace QualityCapsIrina.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("QualityCapsIrina.Models.User", b =>
+            modelBuilder.Entity("QualityCapsIrina.Models.Customer", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<string>("AddressLine1")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                    b.Property<string>("AddressLine2");
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<string>("HomeNumber");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<bool>("IsLocked");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
+                    b.Property<string>("MobileNumber");
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("WorkNumber");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.ToTable("Customer");
 
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
+                    b.HasDiscriminator().HasValue("Customer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,7 +357,7 @@ namespace QualityCapsIrina.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("QualityCapsIrina.Models.User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -344,7 +365,7 @@ namespace QualityCapsIrina.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("QualityCapsIrina.Models.User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -357,7 +378,7 @@ namespace QualityCapsIrina.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("QualityCapsIrina.Models.User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -365,17 +386,10 @@ namespace QualityCapsIrina.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("QualityCapsIrina.Models.User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("QualityCapsIrina.Models.Customer", b =>
-                {
-                    b.HasOne("QualityCapsIrina.Models.User", "User")
-                        .WithOne("Customer")
-                        .HasForeignKey("QualityCapsIrina.Models.Customer", "UserId1");
                 });
 
             modelBuilder.Entity("QualityCapsIrina.Models.Item", b =>
@@ -395,8 +409,7 @@ namespace QualityCapsIrina.Migrations
                 {
                     b.HasOne("QualityCapsIrina.Models.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CustomerID");
                 });
 
             modelBuilder.Entity("QualityCapsIrina.Models.OrderItem", b =>
