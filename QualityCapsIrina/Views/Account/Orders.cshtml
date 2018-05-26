@@ -1,0 +1,71 @@
+﻿@model IEnumerable<QualityCapsIrina.Models.Order>
+
+@{
+    ViewData["Title"] = "Orders";
+    string action = ViewContext.RouteData.Values["Action"].ToString().ToLower();
+}
+<div class="page-content-wrapper">
+    <ul class="nav nav-tabs mt-3 mb-3">
+        <li class="nav-item">
+            <a class="nav-link @(action=="profile"? "active" : "")" asp-action="Profile">
+                Profile details
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(action=="orders"? "active" : "")" asp-action="Orders">
+                Orders
+            </a>
+        </li>
+    </ul>
+    <h2>Orders</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subtotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GST)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subtotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GST)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Id)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

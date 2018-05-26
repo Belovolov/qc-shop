@@ -73,14 +73,23 @@
         <div class="nav-block nav-user-actions">
             @if (User.Identity.IsAuthenticated)
             {
-                <p class="nav-item welcome">@User.Identity.Name</p>
-                @if (User.IsInRole("admin"))
-                {
-                    <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="nav-item"><i class="fas fa-cog"></i> Admin Panel</a>
-                }
-                <form method="post" asp-controller="Account" asp-action="LogOff" class="nav-item">
-                    <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                </form>
+                
+                <div class="nav-item dropdown">
+                    <p class="welcome pb-3 pt-3">@User.Identity.Name <i class="fas fa-angle-down"></i></p>
+                    <div class="dropdown-content">
+                        @if (User.IsInRole("customer"))
+                        {
+                            <a asp-controller="Account" asp-action="Orders"><i class="fa fa-list-ul"></i> Orders</a>
+                            <a asp-controller="Account" asp-action="Profile"><i class="fa fa-user-circle"></i> Profile</a>
+                        }
+                        else if (User.IsInRole("admin"))
+                        {
+                            <a asp-area="Admin" asp-controller="Admin" asp-action="Index"><i class="fas fa-cog"></i> Admin Panel</a>
+                        }
+                        <hr class="m-0" />
+                        <a asp-controller="Account" asp-action="LogOff"><i class="fas fa-sign-out-alt"></i> Log off</a>
+                    </div>
+                </div>             
             }
             else
             {

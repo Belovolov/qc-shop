@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/admin.css" />
+        <link rel="stylesheet" href="~/css/dropdown.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" 
@@ -23,7 +24,7 @@
               asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/dropdown.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
@@ -37,39 +38,45 @@
             <a asp-area="Admin" asp-controller="Admin" asp-action="Index" style="font-size: 3vw;">Administation panel</a>
         </div>
         <div class="nav-block nav-user-actions">
-            <p class="nav-item welcome" style="margin-bottom: 0; font-weight: bold;">@User.Identity.Name</p>
-            <form method="post" asp-area="" asp-controller="Account" asp-action="LogOff" class="nav-item">
-                <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
-            </form>
+            <div class="nav-item dropdown">
+                <p class="welcome pb-3 pt-3">@User.Identity.Name <i class="fas fa-angle-down"></i></p>
+                <div class="dropdown-content dropdown-content-to-right">
+                    <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-users"></i> View customer area</a>              
+                    <hr class="m-0" />
+                    <a asp-controller="Account" asp-action="LogOff"><i class="fas fa-sign-out-alt"></i> Log off</a>
+                </div>
+            </div>
         </div>
     </nav>
-    <ul class="nav nav-tabs mt-3 mb-3">
-        <li class="nav-item">
-            <a class="nav-link @(contr=="categories"? "active" : "")" id="categories-index" asp-area="Admin" asp-controller="Categories" asp-action="Index">
-                Categories
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link @(contr=="items"? "active" : "")" asp-area="Admin" asp-controller="Items" asp-action="Index">
-                Items
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link @(contr=="suppliers"? "active" : "")" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">
-                Suppliers
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link @(contr=="users"? "active" : "")" asp-area="Admin" asp-controller="Users" asp-action="Index">
-                Users
-            </a>
-        </li>
-    </ul>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
+    
+    <div class="body-content">
+        <div class="page-content-wrapper">
+            <ul class="nav nav-tabs mt-3 mb-3">
+                <li class="nav-item">
+                    <a class="nav-link @(contr=="categories"? "active" : "")" id="categories-index" asp-area="Admin" asp-controller="Categories" asp-action="Index">
+                        Categories
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(contr=="items"? "active" : "")" asp-area="Admin" asp-controller="Items" asp-action="Index">
+                        Items
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(contr=="suppliers"? "active" : "")" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">
+                        Suppliers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(contr=="users"? "active" : "")" asp-area="Admin" asp-controller="Users" asp-action="Index">
+                        Users
+                    </a>
+                </li>
+            </ul>
+            @RenderBody()
+        </div>
         <footer>
-            <p>&copy; 2018 - Quality Caps Irina</p>
+            <p>&copy; 2018 - Quality Caps. Administration panel</p>
         </footer>
     </div>
     <environment include="Development">

@@ -121,7 +121,6 @@ body {
 }
 
 .nav-user-actions {
-    text-align: right;
     vertical-align: bottom;
 }
 
@@ -454,4 +453,9 @@ button {
 }
 input {
     outline: none;
+}
+
+a.bo-rad-23:hover {
+    text-decoration: none;
+
 }

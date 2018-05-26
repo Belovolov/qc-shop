@@ -37,6 +37,9 @@ namespace QualityCapsIrina
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<StoreContext>();
 
+            //services.AddIdentity<Customer, IdentityRole>()
+            //    .AddEntityFrameworkStores<StoreContext>();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             //services.AddTransient<IOrderRepository, OrderRepository>();
@@ -74,7 +77,8 @@ namespace QualityCapsIrina
                 routes.MapRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                    );
             });
         }
     }

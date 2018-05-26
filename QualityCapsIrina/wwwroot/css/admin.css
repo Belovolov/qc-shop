@@ -28,3 +28,18 @@
 .config-block a:hover {
     font-weight: bold;
 }
+
+body {
+    margin-bottom: 30px;
+}
+footer {
+    min-height: 30px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+
+}

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using QualityCapsIrina.Services;
 using QualityCapsIrina.Data;
 using QualityCapsIrina.Models;
 using QualityCapsIrina.Models.ViewModels;
-
 
 namespace QualityCapsIrina.Controllers
 {
@@ -43,7 +44,7 @@ namespace QualityCapsIrina.Controllers
                 Customer user = new Customer
                 {
                     Email = model.Email,
-                    UserName = (model.Username != null) ? model.Username :  model.Email,
+                    UserName = (model.Username != null) ? model.Username : model.Email,
                     IsLocked = false
                 };
                 //adding user
@@ -54,9 +55,9 @@ namespace QualityCapsIrina.Controllers
                     await _userManager.AddToRoleAsync(user, "customer");
                     //send confirmation letter                    
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action("ConfirmEmail","Account", new { userId = user.Id, code }, Request.Scheme);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-                    
+
                     // setting cookie
                     await _signInManager.SignInAsync(user, false);
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
@@ -113,8 +114,8 @@ namespace QualityCapsIrina.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
+
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
@@ -144,8 +145,58 @@ namespace QualityCapsIrina.Controllers
                     TempData["Message"] = "Email confirmation failed. Invalid token";
                 }
             }
-            
+
             return RedirectToAction("Index", "Home");
+        }
+        
+        [HttpGet]
+        [Authorize(Roles = "customer")]
+        public async Task<IActionResult> Profile()
+        {
+            Customer user = (Customer) await _userManager.GetUserAsync(User);            
+            return View(user);            
+            //_signInManager.
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "customer")]
+        public async Task<IActionResult> Update([Bind("Id, FirstName, LastName, AddressLine1, AddressLine2, City, ZipCode")] Customer customer)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (ModelState.IsValid && user.Id == customer.Id)
+            {
+                try
+                {
+                    await _userManager.UpdateAsync(customer);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if ((await _userManager.FindByIdAsync(customer.Id)) == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Profile");
+            }
+            return View(user);            
+        }
+        [HttpGet]
+        public async Task<IActionResult> Orders()
+        {
+            Customer user = (Customer)await _userManager.GetUserAsync(User);
+            if (user!=null)
+            {
+                ICollection<Order> orders = (user.Orders != null) ? user.Orders : new List<Order>();
+                return View(orders);
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }

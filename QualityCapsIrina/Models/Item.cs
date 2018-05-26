@@ -20,7 +20,10 @@ namespace QualityCapsIrina.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ArrivalDate { get; set; }
         public Gender Gender { get; set; }
+
+        [Required]
         public int SupplierId { get; set; }
+        [Required]
         public int CategoryId { get; set; }
         public Supplier Supplier { get; set; }
         public Category Category { get; set; }
