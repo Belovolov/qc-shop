@@ -43,3 +43,11 @@ footer {
     line-height: 30px;
 
 }
+.order-block {
+    background-color: aliceblue;
+    border: 2px solid cadetblue;
+    border-radius: 5px;
+}
+.order-items {
+    height: 100%;
+}

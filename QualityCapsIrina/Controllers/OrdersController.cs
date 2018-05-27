@@ -12,7 +12,7 @@ using QualityCapsIrina.Models;
 
 
 namespace QualityCapsIrina.Controllers
-{
+{    
     public class OrdersController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -53,10 +53,17 @@ namespace QualityCapsIrina.Controllers
         //}
 
         // GET: Orders/Checkout
-        public IActionResult CheckOut(int step = 1)
+        public async Task<IActionResult> CheckOut(int step = 1)
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account", new { returnUrl = $"/Orders/Checkout?step={step}" });
+
+            if (!User.IsInRole("customer"))
+            {
+                TempData["Message"] = "Only customers can make orders";
+                TempData["Title"] = "Error";
+                return RedirectToAction("Index", "Home");
+            }       
            
             if (step==1)
             {
@@ -64,10 +71,39 @@ namespace QualityCapsIrina.Controllers
             }
             else if (step==2)
             {
-                return View();
-            }
-            else
-                return RedirectToAction("Error","Home");
+                var items = _shoppingCart.GetShoppingCartItems();
+                _shoppingCart.ShoppingCartItems = items;
+                var _order = new Order
+                {
+                    Status = OrderStatus.Waiting,
+                    Date = DateTime.Now,
+                    Subtotal = (double)_shoppingCart.GetShoppingCartTotal(),
+                    GST = 15,
+                    GrandTotal = Math.Round((double)_shoppingCart.GetShoppingCartTotal() * 1.15, 2),
+                    CustomerID = _userManager.GetUserId(User)
+                };
+
+                if (ModelState.IsValid)
+                {
+                    _order.OrderItems = new List<OrderItem>();
+                    foreach (var item in _shoppingCart.ShoppingCartItems)
+                    {
+                        var orderItem = new OrderItem
+                        {
+                            ItemID = item.Item.ItemId,
+                            Quantity = item.Amount
+                        };
+                        _context.OrderItems.Add(orderItem);
+                        _order.OrderItems.Add(orderItem);
+                    }
+                    _context.Orders.Add(_order);
+                    await _context.SaveChangesAsync();
+                    _shoppingCart.ClearCart();
+                    return RedirectToAction(nameof(CheckoutComplete));
+                    //return View(_order);
+                }
+            }            
+            return RedirectToAction("Error","Home");
         }
 
         [Authorize]
@@ -76,6 +112,7 @@ namespace QualityCapsIrina.Controllers
             Customer customer = (Customer)(await _userManager.GetUserAsync(User));
             return View(customer);
         }
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmDetails(
@@ -117,44 +154,44 @@ namespace QualityCapsIrina.Controllers
         // POST: Orders/Checkout
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CheckOut(Order order)
-        {
-            var items = _shoppingCart.GetShoppingCartItems();
-            _shoppingCart.ShoppingCartItems = items;
-            var _order = new Order
-            {
-                Status = OrderStatus.Waiting,
-                Date = DateTime.Now,
-                Subtotal = (double)_shoppingCart.GetShoppingCartTotal(),
-                GST = 15,
-                GrandTotal = (double)_shoppingCart.GetShoppingCartTotal() * 1.15,
-                CustomerID = _userManager.GetUserId(User)
-            };            
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CheckOut(Order order)
+        //{
+        //    var items = _shoppingCart.GetShoppingCartItems();
+        //    _shoppingCart.ShoppingCartItems = items;
+        //    var _order = new Order
+        //    {
+        //        Status = OrderStatus.Waiting,
+        //        Date = DateTime.Now,
+        //        Subtotal = (double)_shoppingCart.GetShoppingCartTotal(),
+        //        GST = 15,
+        //        GrandTotal = (double)_shoppingCart.GetShoppingCartTotal() * 1.15,
+        //        CustomerID = _userManager.GetUserId(User)
+        //    };            
 
-            if (ModelState.IsValid)
-            {
-                foreach (var item in _shoppingCart.ShoppingCartItems)
-                {
-                    var orderItem = new OrderItem
-                    {
-                        ItemID = item.Item.ItemId,
-                        Quantity = item.Amount
-                    };
-                    _context.Add(orderItem);
-                    _order.OrderItems.Add(orderItem);
-                }
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(CheckOutComplete));
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        foreach (var item in _shoppingCart.ShoppingCartItems)
+        //        {
+        //            var orderItem = new OrderItem
+        //            {
+        //                ItemID = item.Item.ItemId,
+        //                Quantity = item.Amount
+        //            };
+        //            _context.Add(orderItem);
+        //            _order.OrderItems.Add(orderItem);
+        //        }
+        //        _context.Add(order);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(CheckOutComplete));
+        //    }
             
-            return View();
-        }        
+        //    return View();
+        //}        
 
         // GET: Orders/CheckOutComplete
-        public IActionResult CheckOutComplete()
+        public IActionResult CheckoutComplete()
         {
             return View();
         }

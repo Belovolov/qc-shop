@@ -23,6 +23,14 @@ namespace QualityCapsIrina.Models.ViewModels
         public string Password { get; set; }
 
         [Required]
+        [Display(Name ="Phone number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Phone type")]
+        public string PhoneType { get; set; }
+
+        [Required]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]

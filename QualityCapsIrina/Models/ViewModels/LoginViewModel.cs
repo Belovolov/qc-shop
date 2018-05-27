@@ -9,8 +9,8 @@ namespace QualityCapsIrina.Models.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Email or username")]
+        public string EmailOrUsername { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

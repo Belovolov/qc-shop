@@ -43,7 +43,7 @@
                 <div class="dropdown-content dropdown-content-to-right">
                     <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-users"></i> View customer area</a>              
                     <hr class="m-0" />
-                    <a asp-controller="Account" asp-action="LogOff"><i class="fas fa-sign-out-alt"></i> Log off</a>
+                    <a asp-area="" asp-controller="Account" asp-action="LogOff"><i class="fas fa-sign-out-alt"></i> Log off</a>
                 </div>
             </div>
         </div>
@@ -54,22 +54,27 @@
             <ul class="nav nav-tabs mt-3 mb-3">
                 <li class="nav-item">
                     <a class="nav-link @(contr=="categories"? "active" : "")" id="categories-index" asp-area="Admin" asp-controller="Categories" asp-action="Index">
-                        Categories
+                        <i class="fas fa-sitemap"></i> Categories
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @(contr=="items"? "active" : "")" asp-area="Admin" asp-controller="Items" asp-action="Index">
-                        Items
-                    </a>
+                        <i class="fab fa-pied-piper-hat"></i> Items
+</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @(contr=="suppliers"? "active" : "")" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">
-                        Suppliers
+                        <i class="fas fa-truck"></i> Suppliers
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(contr=="users"? "active" : "")" asp-area="Admin" asp-controller="Users" asp-action="Index">
-                        Users
+                    <a class="nav-link @(contr=="customers"? "active" : "")" asp-area="Admin" asp-controller="Customers" asp-action="Index">
+                        <i class="fas fa-users"></i> Customers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(contr=="orders"? "active" : "")" asp-area="Admin" asp-controller="Orders" asp-action="Index">
+                        <i class="fa fa-list-ul"></i> Orders
                     </a>
                 </li>
             </ul>

@@ -6,75 +6,123 @@
 <div class="page-content-wrapper">
     <ul class="nav nav-tabs mt-3 mb-3">
         <li class="nav-item">
-            <a class="nav-link @(action=="profile"? "active" : "")" asp-action="Profile">
+            <a class="nav-link @(action == "profile" ? "active" : "")" asp-action="Profile">
                 Profile details
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link @(action=="orders"? "active" : "")" asp-action="Orders">
+            <a class="nav-link @(action == "orders" ? "active" : "")" asp-action="Orders">
                 Orders
             </a>
         </li>
     </ul>
-    <h2>Profile</h2>
-    <row>
-        <div class="col-md-6 offset-md-3">
-            <form asp-action="ConfirmDetails" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
+    
+    <form id="details" asp-action="Update" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row">
+            <div class="col-md-4 pr-md-5 pl-md-4">
+                <h4>Account</h4>
+                <p>
+                    Email: <em>@Model.Email </em>
+                    @if (Model.EmailConfirmed)
+                    {
+                        <span class="badge badge-success">Confirmed</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-secondary">Not confirmed</span>
+                    }
+
+                </p>
+                <p>Username: <em>@Model.UserName</em></p>
+                <h4>Name</h4>
                 <div class="form-group">
                     <label asp-for="FirstName" class="control-label"></label>
-                    <input asp-for="FirstName" class="form-control" />
+                    <input readonly asp-for="FirstName" class="form-control" @ReadOnly/>
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="LastName" class="control-label"></label>
-                    <input asp-for="LastName" class="form-control" />
+                    <input readonly asp-for="LastName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
+            </div>
+            <div class="col-md-4 px-md-5">
+                <h4>Contact phones</h4>
                 <div class="form-group">
                     <label asp-for="HomeNumber" class="control-label"></label>
-                    <input asp-for="HomeNumber" class="form-control" />
+                    <input readonly asp-for="HomeNumber" class="form-control"  />
                     <span asp-validation-for="HomeNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="MobileNumber" class="control-label"></label>
-                    <input asp-for="MobileNumber" class="form-control"></input>
+                    <input readonly asp-for="MobileNumber" class="form-control" />
                     <span asp-validation-for="MobileNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="WorkNumber" class="control-label"></label>
-                    <input asp-for="WorkNumber" class="form-control"></input>
+                    <input readonly asp-for="WorkNumber" class="form-control" />
                     <span asp-validation-for="WorkNumber" class="text-danger"></span>
                 </div>
+            </div>
+
+            <div class="col-md-4 px-md-4">
+                <h4>Address</h4>
                 <div class="form-group">
                     <label asp-for="AddressLine1" class="control-label"></label>
-                    <input asp-for="AddressLine1" class="form-control"></input>
+                    <input readonly asp-for="AddressLine1" class="form-control" />
                     <span asp-validation-for="AddressLine1" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="AddressLine2" class="control-label"></label>
-                    <input asp-for="AddressLine2" class="form-control"></input>
+                    <input readonly asp-for="AddressLine2" class="form-control" />
                     <span asp-validation-for="AddressLine2" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="City" class="control-label"></label>
-                    <input asp-for="City" class="form-control"></input>
+                    <input readonly asp-for="City" class="form-control" />
                     <span asp-validation-for="City" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ZipCode" class="control-label"></label>
-                    <input asp-for="ZipCode" class="form-control"></input>
+                    <input readonly asp-for="ZipCode" class="form-control" />
                     <span asp-validation-for="ZipCode" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </form>
+            </div>
         </div>
-    </row>
+                
+        <div class="form-group">
+            <button id="edit" type="button" class="btn btn-outline-info"><i class="fa fa-edit"></i> Edit</button>
+            <button id="cancel" hidden type="button" class="btn btn-dark" >Cancel</button>
+            <button id="save" hidden type="submit" class="btn btn-info" >Save</button>
+        </div>
+    </form>
 </div>
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var locked = ("@ViewData["Edit"]" == "True");
+            if (locked) {
+                switchToEdit()
+                
+            }
+            $("button#edit").click(switchToEdit)
+            $("button#cancel").click(function () {
+                location.href = "/Account/Profile";
+            })
+            function switchToEdit() {
+                $("#details input[type!=hidden]").removeAttr("readonly");
+                $("button#cancel").removeAttr("hidden")
+                $("button#save").removeAttr("hidden")
+                $("button#edit").attr("hidden", "hidden")
+            }
+        })
+        
+        
+    </script>
+}
 
 
 

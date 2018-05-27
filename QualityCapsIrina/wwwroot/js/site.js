@@ -19,3 +19,7 @@ $('.owl-carousel').owlCarousel({
 })
 
 $('#confirmation-message').modal()
+
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})

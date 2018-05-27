@@ -26,8 +26,15 @@ var deps = {
         "dist/**/*": ""
     },
     "owl.carousel": {
-        "dist/*": "",
-        "dist/assets/*": ""
+        "dist/*.js": "",
+        "dist/assets/*": "assets"
+    },
+    "select2": {
+        "dist/css/*": "css",
+        "dist/js/*":"js"
+    },
+    "popper.js": {
+        "dist/umd/*.js": "umd"
     }
     // ...
 

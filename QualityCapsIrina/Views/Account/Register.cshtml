@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewData["Title"] = "Account";
+﻿@{
+    ViewData["Title"] = "Register";
 }
 
 @model QualityCapsIrina.Models.ViewModels.RegisterViewModel
@@ -13,8 +12,8 @@
             <div class="col-sm-6 col-lg-4 offset-lg-4 offset-sm-3">
                 <div class="signup-form">
                     <!--sign up form-->
-                    <h2>New User Signup!</h2>
-                    <form method="post" asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">
+                    <h2 class="text-center">New User Signup</h2>
+                    <form autocomplete="off" method="post" asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">
                         <div asp-validation-summary="All" class="text-danger mb-3"></div>
                         <div>
                             <input id="register-email" asp-for="Email" placeholder="Email" />
@@ -22,13 +21,21 @@
                         <div>
                             <input id="register-username" asp-for="Username" placeholder="Username (optional)" />
                         </div>
+                        <div class="phone-input">
+                            <select asp-for="PhoneType">
+                                <option value="mobile"><i class="fas fa-mobile-alt"></i> Mobile</option>
+                                <option value="home"><i class="fas fa-home"></i> Home</option>
+                                <option value="work"><i class="fas fa-building"></i> Work</option>
+                            </select>
+                            <input asp-for="PhoneNumber" placeholder="Phone number" />
+                        </div>
                         <div>
                             <input id="register-password" asp-for="Password" placeholder="Password" />
                         </div>
                         <div>
                             <input asp-for="PasswordConfirm" placeholder="Confirm password" />
                         </div>
-                        <button type="submit" class="btn btn-default">Signup</button>
+                        <button type="submit" class="mt-3 btn btn-success">Signup</button>
                     </form>
                 </div><!--/sign up form-->
             </div>            

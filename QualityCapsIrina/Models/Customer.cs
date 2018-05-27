@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
@@ -49,5 +50,26 @@ namespace QualityCapsIrina.Models
         public bool IsLocked { get; set; }
 
         public ICollection<Order> Orders { get; set; }
+
+        public string FullName { get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+
+        public string FullAddress { get
+            {
+                StringBuilder address = new StringBuilder();
+                address.Append(EmptyOrNull(AddressLine1) ? "" : AddressLine1 + ", ");
+                address.Append(EmptyOrNull(AddressLine2) ? "" : AddressLine2 + ", ");
+                address.Append(EmptyOrNull(City) ? "" : City + ", ");
+                address.Append(EmptyOrNull(ZipCode) ? "" : ZipCode + ", ");
+                return address.ToString().TrimEnd(new char[] { ',', ' ' });
+            }
+        }
+        private bool EmptyOrNull(string s)
+        {
+            return (s == null) || (s.Length == 0);
+        }
     }
 }

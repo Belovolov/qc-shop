@@ -22,6 +22,7 @@ namespace QualityCapsIrina.Controllers
 
         public AccountController(UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
+            StoreContext context,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -30,6 +31,7 @@ namespace QualityCapsIrina.Controllers
 
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _context = context;
         }
         [HttpGet]
         public IActionResult Register(string returnUrl = null)
@@ -39,13 +41,21 @@ namespace QualityCapsIrina.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            bool IsEmailInUse = _userManager.Users.Any(u => u.Email == model.Email);
+            if (IsEmailInUse == true)
+            {
+                ModelState.AddModelError("Email", "Email already in use");
+            }
             if (ModelState.IsValid)
             {
                 Customer user = new Customer
                 {
                     Email = model.Email,
                     UserName = (model.Username != null) ? model.Username : model.Email,
-                    IsLocked = false
+                    IsLocked = false,
+                    WorkNumber = (model.PhoneType == "work") ? model.PhoneNumber : null,
+                    HomeNumber = (model.PhoneType == "home") ? model.PhoneNumber : null,
+                    MobileNumber = (model.PhoneType == "mobile") ? model.PhoneNumber : null
                 };
                 //adding user
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -93,8 +103,21 @@ namespace QualityCapsIrina.Controllers
         {
             if (ModelState.IsValid)
             {
+                //try treat as username
+                var username = model.EmailOrUsername;
                 var result =
-                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                    await _signInManager.PasswordSignInAsync(username, model.Password, model.RememberMe, false);                
+                if (!result.Succeeded)
+                {
+                    //try treat as email
+                    var email = model.EmailOrUsername;
+                    var userByEmail = await _userManager.FindByEmailAsync(email);
+                    if (userByEmail != null)
+                    {
+                        result =
+                            await _signInManager.PasswordSignInAsync(userByEmail, model.Password, model.RememberMe, false);
+                    }                    
+                }
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
@@ -151,27 +174,39 @@ namespace QualityCapsIrina.Controllers
         
         [HttpGet]
         [Authorize(Roles = "customer")]
-        public async Task<IActionResult> Profile()
+        public async Task<IActionResult> Profile(bool edit = false)
         {
-            Customer user = (Customer) await _userManager.GetUserAsync(User);            
+            Customer user = (Customer) await _userManager.GetUserAsync(User);
+            ViewData["Edit"] = edit;
             return View(user);            
             //_signInManager.
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "customer")]
-        public async Task<IActionResult> Update([Bind("Id, FirstName, LastName, AddressLine1, AddressLine2, City, ZipCode")] Customer customer)
+        public async Task<IActionResult> Update(
+            [Bind("Id, FirstName, LastName, MobileNumber, WorkNumber, HomeNumber, AddressLine1, AddressLine2, City, ZipCode")] Customer submittedCustomer)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (ModelState.IsValid && user.Id == customer.Id)
+            Customer customer = (Customer)(await _userManager.GetUserAsync(User));
+            if (ModelState.IsValid && customer.Id == submittedCustomer.Id)
             {
                 try
-                {
+                {                   
+                    customer.FirstName = submittedCustomer.FirstName;
+                    customer.LastName = submittedCustomer.LastName;
+                    customer.HomeNumber = submittedCustomer.HomeNumber;
+                    customer.MobileNumber = submittedCustomer.MobileNumber;
+                    customer.WorkNumber = submittedCustomer.WorkNumber;
+                    customer.AddressLine1 = submittedCustomer.AddressLine1;
+                    customer.AddressLine2 = submittedCustomer.AddressLine2;
+                    customer.City = submittedCustomer.City;
+                    customer.ZipCode = submittedCustomer.ZipCode;
+                    var result = await _userManager.UpdateAsync(customer);
                     await _userManager.UpdateAsync(customer);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if ((await _userManager.FindByIdAsync(customer.Id)) == null)
+                    if ((await _userManager.FindByIdAsync(submittedCustomer.Id)) == null)
                     {
                         return NotFound();
                     }
@@ -182,15 +217,20 @@ namespace QualityCapsIrina.Controllers
                 }
                 return RedirectToAction("Profile");
             }
-            return View(user);            
+            ViewData["Edit"] = true;
+            return View("Profile", customer);
         }
         [HttpGet]
         public async Task<IActionResult> Orders()
         {
             Customer user = (Customer)await _userManager.GetUserAsync(User);
+            
             if (user!=null)
             {
-                ICollection<Order> orders = (user.Orders != null) ? user.Orders : new List<Order>();
+                var orders = await _context.Orders
+                    .Where(o => o.CustomerID == user.Id)
+                    .OrderByDescending(o => o.Date)
+                    .ToListAsync();
                 return View(orders);
             }
             else

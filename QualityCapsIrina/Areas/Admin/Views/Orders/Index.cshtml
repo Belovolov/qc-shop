@@ -1,0 +1,78 @@
+﻿@model IEnumerable<QualityCapsIrina.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subtotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GST)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrandTotal)
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @if (item.Status == OrderStatus.Shipped)
+                {
+                    <span class="badge badge-success">@OrderStatus.Shipped</span>
+                }
+                else
+                {
+                    <span class="badge badge-warning">@item.Status</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subtotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GST)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrandTotal)
+            </td>
+            <td>
+                <a asp-controller="Customers" asp-action="Details" asp-route-id="@item.CustomerID">
+                    @item.Customer.FullName
+                </a>
+            </td>
+            <td>
+                @if (item.Status == OrderStatus.Shipped)
+                {
+                    <span class="text-secondary">Mark as shipped</span>
+                }
+                else
+                {
+                    <a asp-action="MarkShipped" asp-route-id="@item.OrderID">Mark as shipped</a>
+                }
+                |
+                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

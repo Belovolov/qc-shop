@@ -1,4 +1,8 @@
-﻿.login-container {
+﻿/*************************
+*******login page CSS******
+**************************/
+
+.login-container {
     display: flex;
     justify-content: center;
 }
@@ -15,42 +19,52 @@
     padding: 5px;
     margin: 2px;
 }
-/*.field-validation-error {
-    color: rgb(242, 71, 71);
-}*/
-/*************************
-*******login page CSS******
-**************************/
+
 #form {
     display: block;
     margin-bottom: 50px;
     margin-top: 50px;
-    overflow: hidden;
+    overflow: hidden;    
 }
-
 
 .login-form h2, .signup-form h2 {
     color: #696763;
-    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: 300;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
-
+.signup-form h2 {
+    margin-bottom: 20px;
+}
+.login-form form, .signup-form form {
+    display: flex;
+    flex-direction: column;
+}
 
 .login-form form input, .signup-form form input {
     background: #F0F0E9;
-    border: medium none;
-    color: #696763;
+    border: medium none;    
     display: block;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 300;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
+    color: black;
+    font-size: 17px;
+    font-weight: 400;
     height: 40px;
     margin-bottom: 10px;
     outline: medium none;
     padding-left: 10px;
     width: 100%;
+}
+.phone-input {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+.phone-input select {
+    margin-bottom: 10px;
+    border: medium none;
+    margin-right: 5px;
+    background: #F0F0E9;
 }
 
 .login-form form span {
@@ -64,18 +78,13 @@
     margin-right: 5px;
 }
 
-.login-form form button {
-    margin-top: 23px;
-}
 
 .login-form form button, .signup-form form button {
-    background: #FE980F;
     border: medium none;
-    border-radius: 0;
-    color: #FFFFFF;
     display: block;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 6px 25px;
+    align-self: center;
 }
 
 
@@ -90,14 +99,25 @@
 
 
 .or {
-    background: #FE980F;
+    background: rgb(245,245,245);
     border-radius: 40px;
-    color: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    color: black;
     font-size: 16px;
-    height: 50px;
-    line-height: 50px;
-    margin: 25px auto;
+    height: 70px;
+    line-height: 70px;
+    margin: 35px auto;
     text-align: center;
-    width: 50px;
+    width: 70px;
+}
+
+.create-new {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
+}
+
+@media screen and (max-width: 575px) {
+    .create-new {
+        display: flex;
+        justify-content: center;
+    }
 }
