@@ -1,0 +1,115 @@
+﻿@model IEnumerable<QualityCapsIrina.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+    string message = TempData["Message"] as string;
+    string title = TempData["Title"] as string;
+    if (message != null && title != null)
+    {
+        <div class="modal" id="confirmation-message" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>@message</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<div class="my-2">
+    <label for="status">Select status filter</label>
+    <select id="status" asp-items="ViewBag.StatusOptions"></select>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Email confirmed
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @item.FullName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                </td>
+                <td>
+                    @if (item.IsLocked)
+                    {
+                        <span title="Blocked" class="badge badge-dark"><i class="fas fa-ban"></i></span>
+                    }
+                    else
+                    {
+                        <span title="Active" class="badge badge-success"><i class="fas fa-check"></i></span>
+                    }
+                </td>
+                <td>
+                    @if (item.IsLocked)
+                    {
+                        <a asp-action="Unlock" asp-route-id="@item.Id">Unlock</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Lock" asp-route-id="@item.Id">Block</a>
+                    }
+                    |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger"><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#status").selectmenu({
+                change: function (event, data) {
+                    var val = $(this).val()
+                    console.log(val)
+                    if (val == 3) {
+                        location.href = "/Admin/Customers/Index"
+                    }
+                    else {
+                        location.href = "/Admin/Customers/Index?isLocked=" + val
+                    }
+                }
+
+            })
+        });
+    </script>
+}

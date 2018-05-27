@@ -12,18 +12,21 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/admin.css" />
         <link rel="stylesheet" href="~/css/dropdown.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" 
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
               crossorigin="anonymous"
               asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/admin.css" />
         <link rel="stylesheet" href="~/css/dropdown.css" asp-append-version="true" />
     </environment>
 </head>
@@ -51,7 +54,7 @@
     
     <div class="body-content">
         <div class="page-content-wrapper">
-            <ul class="nav nav-tabs mt-3 mb-3">
+            <ul class="nav nav-tabs mt-3 mb-3 justify-content-center">
                 <li class="nav-item">
                     <a class="nav-link @(contr=="categories"? "active" : "")" id="categories-index" asp-area="Admin" asp-controller="Categories" asp-action="Index">
                         <i class="fas fa-sitemap"></i> Categories
@@ -86,6 +89,7 @@
     </div>
     <environment include="Development">
         <script src="~/lib/jquery/jquery.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="~/lib/bootstrap/js/bootstrap.js"></script>
         <script src="~/lib/fontawesome-free-5.0.10/svg-with-js/js/fontawesome-all.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using QualityCapsIrina.Data;
 using QualityCapsIrina.Models;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 namespace QualityCapsIrina.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "admin")]
     public class ItemsController : Controller
     {
         private readonly StoreContext _context;
@@ -85,6 +87,7 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Genders"] = new SelectList(Enum.GetValues(typeof(Gender)).Cast<Gender>());
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", item.CategoryId);
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", item.SupplierId);
             return View(item);
@@ -152,6 +155,7 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Genders"] = new SelectList(Enum.GetValues(typeof(Gender)).Cast<Gender>(), item.Gender);
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", item.CategoryId);
             ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Name", item.SupplierId);
             return View(item);
@@ -183,7 +187,16 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var item = await _context.Items.SingleOrDefaultAsync(m => m.ItemId == id);
+            var scItems = _context.ShoppingCartItems.Where(sc => sc.ItemId == item.ItemId);
+            var orderItems = _context.OrderItems.Where(oi => oi.ItemID == item.ItemId);
+            var orders = orderItems.Include(oi => oi.Order).Select(oi => oi.Order);
+            _context.ShoppingCartItems.RemoveRange(scItems);
+            await _context.SaveChangesAsync();
+            _context.OrderItems.RemoveRange(orderItems);
+            _context.Orders.RemoveRange(orders);
             _context.Items.Remove(item);
+            
+            //var dependendOrders = await _context.Orders.Where(o => o)
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

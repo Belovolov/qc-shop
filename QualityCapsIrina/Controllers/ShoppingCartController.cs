@@ -36,14 +36,23 @@ namespace QualityCapsIrina.Controllers
             return View(shoppingCartViewModel);
         }
 
-        public RedirectToActionResult AddToShoppingCart(int itemId)
+        public RedirectToActionResult AddToShoppingCart(int itemId, int amount=1)
         {
             var selectedItem = _context.Items.FirstOrDefault(p => p.ItemId == itemId);
 
-            if (selectedItem != null)
+            if (selectedItem != null && amount >=1)
             {
-                _shoppingCart.AddToCart(selectedItem, 1);
+                _shoppingCart.AddToCart(selectedItem, amount);
             }
+            return RedirectToAction("Index");
+        }
+        public RedirectToActionResult SetAmountInCart(int itemId, int? amount)
+        {
+            var selectedItem = _context.Items.FirstOrDefault(p => p.ItemId == itemId);
+            if (amount!=null)
+            {
+                _shoppingCart.SetAmountInCart(selectedItem, (int)amount);
+            }            
             return RedirectToAction("Index");
         }
 

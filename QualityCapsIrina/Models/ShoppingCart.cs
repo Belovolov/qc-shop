@@ -46,42 +46,50 @@ namespace QualityCapsIrina.Models
                 {
                     ShoppingCartId = ShoppingCartId,
                     Item = item,
-                    Amount = 1
+                    Amount = amount
                 };
 
                 _context.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {
-                shoppingCartItem.Amount++;
+                shoppingCartItem.Amount+=amount;
             }
             _context.SaveChanges();
         }
-
-        public int RemoveFromCart(Item item)
+        public void SetAmountInCart(Item item, int amount)
         {
             var shoppingCartItem =
                     _context.ShoppingCartItems.SingleOrDefault(
                         s => s.Item.ItemId == item.ItemId && s.ShoppingCartId == ShoppingCartId);
-
-            var localAmount = 0;
-
+                        
             if (shoppingCartItem != null)
             {
-                if (shoppingCartItem.Amount > 1)
+                if (amount >= 1)
                 {
-                    shoppingCartItem.Amount--;
-                    localAmount = shoppingCartItem.Amount;
+                    shoppingCartItem.Amount = amount;
+
+                    _context.ShoppingCartItems.Update(shoppingCartItem);
+                    _context.SaveChanges();
                 }
                 else
                 {
-                    _context.ShoppingCartItems.Remove(shoppingCartItem);
+                    RemoveFromCart(item);
                 }
+            }            
+        }
+
+        public void RemoveFromCart(Item item)
+        {
+            var shoppingCartItem =
+                    _context.ShoppingCartItems.SingleOrDefault(
+                        s => s.Item.ItemId == item.ItemId && s.ShoppingCartId == ShoppingCartId);
+                        
+            if (shoppingCartItem != null)
+            {
+                _context.ShoppingCartItems.Remove(shoppingCartItem);
+                _context.SaveChanges();
             }
-
-            _context.SaveChanges();
-
-            return localAmount;
         }
 
         public List<ShoppingCartItem> GetShoppingCartItems()

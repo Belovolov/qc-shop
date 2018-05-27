@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = ViewData["Gender"];
-    var bannerClass = ((Gender)ViewData["Gender"] == Gender.Men) ? "men-banner":"women-banner";
+    var bannerClass = ((Gender)ViewData["Gender"] == Gender.Men) ? "men-banner" : "women-banner";
     var aspAction = ((Gender)ViewData["Gender"] == Gender.Men) ? "men" : "women";
 }
 
@@ -155,8 +155,8 @@
                         <button data-page="@i"
                                 class="item-pagination flex-c-m trans-0-4 @active">
                             @i
-                            </button>
-                        }
+                        </button>
+                    }
                 </div>
             </div>
         </div>
@@ -188,6 +188,7 @@
     <link href="~/css/shopping-page.css" rel="stylesheet" />
 }
 @section Scripts {
+
     <script type="text/javascript">
         $(".selection-1").select2({
             minimumResultsForSearch: 20,
@@ -254,5 +255,5 @@
             $("#search-query").val('')
             $("#search-query").focus()
         })
-    </script>
+    </script>    
 }

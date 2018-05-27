@@ -42,12 +42,9 @@
 
                     <div class="btn-addcart-product-detail size9 trans-0-4 mt-2 mb-2">
                         <!-- Button -->
-                        <a class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4"
-                           asp-controller="shoppingcart"
-                           asp-action="addtoshoppingcart"
-                           asp-route-itemid="@Model.ItemId">
+                        <button id="add-to-cart" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                             Add to Cart
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -56,5 +53,34 @@
 </div>
 
 @section StyleSheets {
-<link href="~/css/details-page.css" rel="stylesheet" />
+    <link href="~/css/details-page.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script>
+        window.cartSubmitTimer = null
+        $(".btn-num-product-down").click(function () {
+            //clearTimeout(window.cartSubmitTimer)
+            var curr = +$(".num-product").val()
+            if (curr > 1) {
+                $(".num-product").val(--curr)
+            }
+            //window.cartSubmitTimer = setTimeout(function () {
+            //    location.href = '/ShoppingCart/AddToCart'
+            //}, 1000)
+        })
+        $(".btn-num-product-up").click(function () {
+            //clearTimeout(window.cartSubmitTimer)
+            var curr = +$(".num-product").val()            
+            $(".num-product").val(++curr)
+            //window.cartSubmitTimer = setTimeout(function () {
+
+
+            //}, 1000)
+        })
+        $('#add-to-cart').click(function () {
+            var amount = +$(".num-product").val() 
+            location.href = "/shoppingcart/addtoshoppingcart?itemId=@Model.ItemId&amount=" + amount;
+        })
+    </script>
 }

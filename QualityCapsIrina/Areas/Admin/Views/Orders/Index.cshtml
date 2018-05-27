@@ -4,7 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-
+<div class="my-2">
+    <label for="status">Select status filter</label>
+    <select id="status" asp-items="ViewBag.StatusOptions" >
+        <option value="3">All</option>
+    </select>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -30,49 +35,69 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @if (item.Status == OrderStatus.Shipped)
-                {
-                    <span class="badge badge-success">@OrderStatus.Shipped</span>
-                }
-                else
-                {
-                    <span class="badge badge-warning">@item.Status</span>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subtotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GST)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GrandTotal)
-            </td>
-            <td>
-                <a asp-controller="Customers" asp-action="Details" asp-route-id="@item.CustomerID">
-                    @item.Customer.FullName
-                </a>
-            </td>
-            <td>
-                @if (item.Status == OrderStatus.Shipped)
-                {
-                    <span class="text-secondary">Mark as shipped</span>
-                }
-                else
-                {
-                    <a asp-action="MarkShipped" asp-route-id="@item.OrderID">Mark as shipped</a>
-                }
-                |
-                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Status == OrderStatus.Shipped)
+                    {
+                        <span class="badge badge-success">@OrderStatus.Shipped</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">@item.Status</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Subtotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GST)%
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.GrandTotal)
+                </td>
+                <td>
+                    <a asp-controller="Customers" asp-action="Details" asp-route-id="@item.CustomerID">
+                        @item.Customer.FullName
+                    </a>
+                </td>
+                <td>
+                    @if (item.Status == OrderStatus.Shipped)
+                    {
+                        <span class="text-secondary">Mark as shipped</span>
+                    }
+                    else
+                    {
+                        <a asp-action="MarkShipped" asp-route-id="@item.OrderID">Mark as shipped</a>
+                    }
+                    |
+                    <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.OrderID" class="text-danger"><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $( function() {
+            $("#status").selectmenu({
+                change: function (event, data) {
+                    var val = $(this).val()
+                    if (val == 3) {
+                        location.href = "/Admin/Orders/Index"
+                    }
+                    else {
+                        location.href = "/Admin/Orders/Index?status=" + val
+                    }
+                }
+
+            })            
+        });
+    </script>
+}

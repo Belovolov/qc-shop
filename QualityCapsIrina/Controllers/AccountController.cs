@@ -92,8 +92,16 @@ namespace QualityCapsIrina.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
-            if (string.IsNullOrEmpty(returnUrl) && Request.Headers["Referer"].ToString() != null)
-                returnUrl = new Uri(Request.Headers["Referer"].ToString()).PathAndQuery;
+            try
+            {
+                if (string.IsNullOrEmpty(returnUrl) && Request.Headers["Referer"].ToString() != null)
+                    returnUrl = new Uri(Request.Headers["Referer"].ToString()).PathAndQuery;
+            }
+            catch (UriFormatException e)
+            {
+                return View(new LoginViewModel { ReturnUrl = null });
+            }
+            
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
@@ -103,21 +111,56 @@ namespace QualityCapsIrina.Controllers
         {
             if (ModelState.IsValid)
             {
-                //try treat as username
-                var username = model.EmailOrUsername;
-                var result =
-                    await _signInManager.PasswordSignInAsync(username, model.Password, model.RememberMe, false);                
-                if (!result.Succeeded)
+
+                var result = Microsoft.AspNetCore.Identity.SignInResult.Failed;
+                try
                 {
-                    //try treat as email
-                    var email = model.EmailOrUsername;
-                    var userByEmail = await _userManager.FindByEmailAsync(email);
-                    if (userByEmail != null)
+                    var username = model.EmailOrUsername;
+                    var user = await _userManager.FindByNameAsync(username);
+                    if (await _signInManager.CanSignInAsync(user))
                     {
-                        result =
-                            await _signInManager.PasswordSignInAsync(userByEmail, model.Password, model.RememberMe, false);
-                    }                    
+                        if (await _userManager.IsInRoleAsync(user, "customer")
+                            && ((Customer)user).IsLocked)
+                        {
+                            ModelState.AddModelError("", "This account has been suspended");
+                            return View(model);
+                        }
+                        else
+                        {
+                            result =
+                                await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+                        }
+
+                    }
+                    else
+                    {
+                        //try treat as email
+                        var email = model.EmailOrUsername;
+                        user = await _userManager.FindByEmailAsync(email);
+                        if (await _signInManager.CanSignInAsync(user))
+                        {
+                            if (await _userManager.IsInRoleAsync(user, "customer")
+                                && ((Customer)user).IsLocked)
+                            {
+                                ModelState.AddModelError("", "This account has been suspended");
+                                return View(model);
+                            }
+                            else
+                            {
+                                result =
+                                    await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+                            }
+                        }
+
+                    }
                 }
+                catch (ArgumentNullException)
+                {
+                    ModelState.AddModelError("", "Incorrect login/password");
+                    return View(model);
+                }
+                //try treat as username
+                
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
@@ -223,8 +266,7 @@ namespace QualityCapsIrina.Controllers
         [HttpGet]
         public async Task<IActionResult> Orders()
         {
-            Customer user = (Customer)await _userManager.GetUserAsync(User);
-            
+            Customer user = (Customer)await _userManager.GetUserAsync(User);            
             if (user!=null)
             {
                 var orders = await _context.Orders

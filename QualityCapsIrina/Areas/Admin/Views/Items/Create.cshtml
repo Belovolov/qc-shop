@@ -28,13 +28,9 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="imageFile" class="control-label">Image:</label>
+                <label for="imageFile" class="control-label">Update image:</label>
                 <input type="file" name="imageFile" />
-            </div>
-            <div class="form-group">
-                <label asp-for="ArrivalDate" class="control-label"></label>
-                <input type="date" asp-for="ArrivalDate" class="form-control"/>
-                <span asp-validation-for="ArrivalDate" class="text-danger"></span>
+                <input asp-for="ImageUrl" type="hidden" />
             </div>
             <div class="form-group">
                 <label asp-for="Gender" class="control-label"></label>
@@ -44,13 +40,15 @@
             <div class="form-group">
                 <label asp-for="SupplierId" class="control-label"></label>
                 <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                <span asp-validation-for="SupplierId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>

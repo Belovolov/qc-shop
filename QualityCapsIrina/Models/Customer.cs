@@ -22,12 +22,15 @@ namespace QualityCapsIrina.Models
         public string LastName { get; set; }
 
         [Phone(ErrorMessage = "Incorrect Phone Format")]
+        [Display(Name = "Home number")]
         public string HomeNumber { get; set; }
 
         [Phone(ErrorMessage = "Incorrect Phone Format")]
+        [Display(Name = "Home number")]
         public string WorkNumber { get; set; }
 
         [Phone(ErrorMessage = "Incorrect Phone Format")]
+        [Display(Name = "Mobile number")]
         public string MobileNumber { get; set; }        
 
         [Required(ErrorMessage = "Please enter your address")]
@@ -48,6 +51,12 @@ namespace QualityCapsIrina.Models
         public string ZipCode { get; set; }
 
         public bool IsLocked { get; set; }
+
+        public bool IsNotAllowed { get
+            {
+                return IsLocked;
+            }
+        }
 
         public ICollection<Order> Orders { get; set; }
 

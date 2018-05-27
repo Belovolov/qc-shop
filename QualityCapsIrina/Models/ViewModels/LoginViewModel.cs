@@ -8,11 +8,11 @@ namespace QualityCapsIrina.Models.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Username or e-mail can not be empty")]
         [Display(Name = "Email or username")]
         public string EmailOrUsername { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password can not be empty")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

@@ -55,7 +55,7 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SupplierId,Name,HomeNumber,WorkNumber,MobileNumber,Email,Address")] Supplier supplier)
+        public async Task<IActionResult> Create([Bind("Name,HomeNumber,WorkNumber,MobileNumber,Email,AddressLine1,AddressLine2,City,ZipCode")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SupplierId,Name,HomeNumber,WorkNumber,MobileNumber,Email,Address")] Supplier supplier)
+        public async Task<IActionResult> Edit(int id, [Bind("SupplierId,Name,HomeNumber,WorkNumber,MobileNumber,Email,AddressLine1,AddressLine2,City,ZipCode")] Supplier supplier)
         {
             if (id != supplier.SupplierId)
             {

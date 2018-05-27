@@ -21,10 +21,17 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
         }
 
         // GET: Admin/Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(OrderStatus? status)
         {
-            var storeContext = _context.Orders.Include(o => o.Customer);
-            return View(await storeContext.ToListAsync());
+            var orders = _context.Orders.AsQueryable();
+            if (status != null)
+            {
+                orders = orders.Where(o => o.Status == status);
+            }
+            var statusList = Enum.GetValues(typeof(OrderStatus)).Cast<OrderStatus>();
+            ViewData["StatusOptions"] = new SelectList(statusList, status);
+            orders = orders.Include(o => o.Customer).OrderBy(o => o.Date);
+            return View(await orders.ToListAsync());
         }
 
         // GET: Admin/Orders/Details/5
