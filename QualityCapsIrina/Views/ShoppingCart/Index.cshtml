@@ -28,7 +28,9 @@
                     {
                         <tr>
                             <td class="cart_product">
-                                <a href=""><img src="@line.Item.ImageUrl" alt=""></a>
+                                <a asp-controller="Items" asp-action="Details" asp-route-id="@line.Item.ItemId">
+                                    <img src="@line.Item.ImageUrl" alt="">
+                                </a>
                             </td>
                             <td class="cart_description">
                                 <h4>

@@ -8,7 +8,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white pl-0">
             <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-            <li class="breadcrumb-item"><a asp-controller="items" asp-action="index" asp-route-category="@Model.Category.CategoryId">@Model.Category.Name</a></li>
+            @*<li class="breadcrumb-item"><a asp-controller="items" asp-action="index" asp-route-category="@Model.Category.CategoryId">@Model.Category.Name</a></li>*@
             <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
         </ol>
     </nav>
@@ -60,23 +60,14 @@
     <script>
         window.cartSubmitTimer = null
         $(".btn-num-product-down").click(function () {
-            //clearTimeout(window.cartSubmitTimer)
             var curr = +$(".num-product").val()
             if (curr > 1) {
                 $(".num-product").val(--curr)
             }
-            //window.cartSubmitTimer = setTimeout(function () {
-            //    location.href = '/ShoppingCart/AddToCart'
-            //}, 1000)
         })
         $(".btn-num-product-up").click(function () {
-            //clearTimeout(window.cartSubmitTimer)
             var curr = +$(".num-product").val()            
             $(".num-product").val(++curr)
-            //window.cartSubmitTimer = setTimeout(function () {
-
-
-            //}, 1000)
         })
         $('#add-to-cart').click(function () {
             var amount = +$(".num-product").val() 
