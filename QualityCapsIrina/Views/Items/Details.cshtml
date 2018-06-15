@@ -58,20 +58,23 @@
 
 @section Scripts {
     <script>
-        window.cartSubmitTimer = null
-        $(".btn-num-product-down").click(function () {
-            var curr = +$(".num-product").val()
-            if (curr > 1) {
-                $(".num-product").val(--curr)
-            }
+        $(document).ready(function () {
+            var baseUrl = $('base').attr('href');
+            $(".btn-num-product-down").click(function () {
+                var curr = +$(".num-product").val()
+                if (curr > 1) {
+                    $(".num-product").val(--curr)
+                }
+            })
+            $(".btn-num-product-up").click(function () {
+                var curr = +$(".num-product").val()            
+                $(".num-product").val(++curr)
+            })
+            $('#add-to-cart').click(function () {
+                var amount = +$(".num-product").val() 
+                location.href = baseUrl + "shoppingcart/addtoshoppingcart?itemId=@Model.ItemId&amount=" + amount;
+            })
         })
-        $(".btn-num-product-up").click(function () {
-            var curr = +$(".num-product").val()            
-            $(".num-product").val(++curr)
-        })
-        $('#add-to-cart').click(function () {
-            var amount = +$(".num-product").val() 
-            location.href = "/shoppingcart/addtoshoppingcart?itemId=@Model.ItemId&amount=" + amount;
-        })
+        
     </script>
 }

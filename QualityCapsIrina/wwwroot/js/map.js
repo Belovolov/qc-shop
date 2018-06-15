@@ -3,7 +3,7 @@
     "use strict";
 
     $(document).ready(function () {
-
+        var baseUrl = $('base').attr('href');
         var selector_map = $('#google_map');
         var img_pin = selector_map.attr('data-pin');
         var data_map_x = selector_map.attr('data-map-x');
@@ -12,7 +12,7 @@
         var draggable = selector_map.attr('data-draggable');
 
         if (img_pin === null) {
-            img_pin = 'images/icons/location.png';
+            img_pin = baseUrl + 'images/icons/location.png';
         }
         if (data_map_x === null || data_map_y === null) {
             data_map_x = 40.007749;
@@ -70,7 +70,5 @@
                 }
             })(marker, i));
         }
-
     });
-
 })(jQuery);

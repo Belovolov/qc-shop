@@ -34,7 +34,7 @@ namespace QualityCapsIrina.Controllers
         {
             string genderString = Request.Path.Value.Split('/')[2].ToLower();
             Gender gender = (genderString == "men") ? Gender.Men : Gender.Women;
-            ViewData["Gender"] = gender;
+            ViewData["Gender"] = gender;    
 
             var shopViewModel = new ShopViewModel();
             IQueryable<Item> items = _context.Items

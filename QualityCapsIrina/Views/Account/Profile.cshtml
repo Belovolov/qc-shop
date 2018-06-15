@@ -103,14 +103,15 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            var locked = ("@ViewData["Edit"]" == "True");
+            var locked = ("@ViewData["Edit"]" == "True"); 
+            var baseUrl = $('base').attr('href');
             if (locked) {
                 switchToEdit()
                 
             }
             $("button#edit").click(switchToEdit)
             $("button#cancel").click(function () {
-                location.href = "/Account/Profile";
+                location.href = baseUrl + "Account/Profile";
             })
             function switchToEdit() {
                 $("#details input[type!=hidden]").removeAttr("readonly");

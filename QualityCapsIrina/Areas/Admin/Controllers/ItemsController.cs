@@ -77,7 +77,7 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
                     string extension = imageFile.FileName.Split(new char[] { '.' }).Last<string>();
                     string fileName = item.Name.Replace(" ","") + "." + extension;
                     string uploads = Path.Combine(_environment.WebRootPath, "images", "caps");
-                    item.ImageUrl = "/images/caps/" + fileName;
+                    item.ImageUrl = "images/caps/" + fileName;
                     using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
                     {
                         await imageFile.CopyToAsync(fileStream);
@@ -131,7 +131,7 @@ namespace QualityCapsIrina.Areas.Admin.Controllers
                     string extension = imageFile.FileName.Split(new char[] { '.' }).Last<string>();
                     string fileName = item.Name.Replace(" ","") + "." + extension;
                     string uploads = Path.Combine(_environment.WebRootPath, "images", "caps");
-                    item.ImageUrl = "/images/caps/" + fileName;
+                    item.ImageUrl = "images/caps/" + fileName;
                     using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
                     {
                         await imageFile.CopyToAsync(fileStream);
